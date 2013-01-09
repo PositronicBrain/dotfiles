@@ -130,9 +130,10 @@ fi
 
 
 # make copy/cut/paste work
-if [ -x /usr/bin/autocutsel ]; then
-autocutsel -fork
-autocutsel -selection PRIMARY -fork
+if [ -x /usr/bin/parcellite ]; then
+parcellite & 
+else
+    echo 'parcellite not found!' | eval $catError
 fi
 
 # start xmonad
