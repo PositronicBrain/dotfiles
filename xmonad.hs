@@ -27,9 +27,13 @@ import XMonad.Hooks.DynamicLog (dynamicLogWithPP,
                                 ppOutput,ppTitle,
                                 shorten,sjanssenPP,xmobarColor)
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers(isFullscreen ,doFullFloat)
+import XMonad.Hooks.ManageHelpers(isFullscreen ,doFullFloat, doCenterFloat,doFullFloat)
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.IM
+import XMonad.Layout.Grid
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Spacing
 import XMonad.Prompt (XPConfig,defaultXPConfig,font,
                       bgColor,
                       fgColor,
@@ -51,6 +55,7 @@ main :: IO ()
 main= do xmproc <- spawnPipe xmobarCmd
          xmonad defaultConfig {
                   modMask = myModMask,
+                  -- smartborders removes borders when logical (e.g. fullscreen)
                   layoutHook =  avoidStruts $ smartBorders
                                 myLayout,
                   keys = myAltKeymap,
@@ -71,12 +76,12 @@ main= do xmproc <- spawnPipe xmobarCmd
 -- ^ Workspace names
 
 ws :: [WorkspaceId]
-ws = ["1:terms","2:emacs","3:web","4:files","5:docs","6:mail"] ++
+ws = ["1:terms","2:emacs","3:web","4:files","5:chat","6:gimp"] ++
      map show [7..9::Int]
 
--- ^ Layout order 
+-- ^ Layout order
 
-myLayout = tiled ||| Full ||| Mirror tiled
+myLayout = onWorkspace "5:chat" pidginLayout $ tiled ||| Full ||| Mirror tiled
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -90,32 +95,45 @@ myLayout = tiled ||| Full ||| Mirror tiled
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
--- ^ Program/Workspace hooks
+--      gridLayout = Grid
 
+     pidginLayout = withIM (18/100) (Role "buddy_list") Grid
+
+
+-- ^ Program/Workspace hooks
 myManageHook :: ManageHook
-myManageHook = composeAll [moveViewC "Evilvte" "1:terms",
-                           moveViewC "Emacs" "2:emacs",
-                           moveViewC "Gitg" "2:emacs",
-                           moveViewC "Chromium" "3:web",
-                           moveC "Pidgin" "3:web",
-                           moveViewC "Thunar" "4:files",
-                           moveViewC "Evince" "5:docs",
-                           moveViewC "Gnome-documents" "5:docs",
-                           moveViewC "Jabref" "5:docs",
-                           moveViewC "Thunderbird" "6:mail",
-                           className =? "defcon.bin.x86" --> unfloat,
-                           className =? "mplayer2" --> doFloat,
-                           className =? "mplayer" --> doFloat,
-                           className =? "Gimp" --> doFloat,
-                           isFullscreen --> doFullFloat
-                          ] <+> manageDocks
-     where
-       moveC c w = className =? c --> doShift w
-       moveT t w = title =? t --> doShift w
-       unfloat = ask >>= doF . W.sink
-       moveViewT t w =  title =? t --> viewShift w
-       moveViewC c w =  className =? c --> viewShift w
-       viewShift =  doF . liftM2 (.) W.greedyView W.shift
+myManageHook = (composeAll $ concat $
+    [ [resource     =? r            --> doIgnore             |   r   <- myIgnores]
+    , [className    =? c            --> viewShift "1:terms"  |   c   <- terms    ]
+    , [className    =? c            --> viewShift "2:emacs"  |   c   <- dev      ]
+    , [className    =? c            --> viewShift "3:web"    |   c   <- web      ]
+    , [className    =? c            --> viewShift "4:files"  |   c   <- files    ]
+    , [className    =? c            --> viewShift "5:chat"   |   c   <- chat     ]
+    , [className    =? c            --> viewShift "6:gimp"   |   c   <- gimp     ]
+    , [className    =? c            --> doCenterFloat        |   c   <- floats   ]
+    , [isFullscreen                 --> myDoFullFloat                            ]
+    ]) <+> manageDocks
+
+    where
+        viewShift =  doF . liftM2 (.) W.greedyView W.shift
+
+        -- classnames
+        terms = ["Evilvte"]
+        files = ["Thunar","Evince","Gnome-documents","Jabref"]
+        floats  = ["MPlayer","XFontSel","Mplayer2","mplayer2"]
+        web    = ["Firefox","Chromium"]
+        dev    = ["Emacs","Gitg"]
+        chat	  = ["Pidgin","Buddy List"]
+        gimp	  = ["Gimp"]
+
+
+        -- resources
+        myIgnores = []
+
+
+        -- a trick for fullscreen but stil allow focusing of other WSs
+        myDoFullFloat :: ManageHook
+        myDoFullFloat = doF W.focusDown <+> doFullFloat
 
 -- ^ Where to find the xmobar binary
 
