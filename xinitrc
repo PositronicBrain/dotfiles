@@ -120,6 +120,14 @@ else
     echo 'tracker not found!' | eval $catError
 fi
 
+# gtk-redshift
+if [ -x /usr/bin/gtk-redshift ]; then
+gtk-redshift &
+else
+    echo 'gtk-redshift not found!' | eval $catError
+fi
+
+
 
 # make copy/cut/paste work
 if [ -x /usr/bin/autocutsel ]; then
