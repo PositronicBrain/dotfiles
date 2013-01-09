@@ -109,8 +109,8 @@ blueman-applet &
 fi
 
 # small volume icon
-if [ -x /usr/bin/volumeicon ]; then
-volumeicon &
+if [ -x /usr/bin/volti ]; then
+volti &
 fi
 
 # tracker
