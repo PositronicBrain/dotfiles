@@ -1,0 +1,13 @@
+Config { font = "xft:Bitstream Vera Sans:pixelsize=11:antialias=true",
+         bgColor = "#EFEBE7",
+         fgColor = "black",
+         position = Static { xpos = 0 , ypos = 0, width = 800, height = 20 },
+         commands = [Run Cpu ["-L","3","-H","50","--normal","blue","--high","red"]   10,
+                     Run Memory ["-t","Mem: <usedratio>%","--normal","blue","--high","red"] 10,
+                     Run Date "%a %b %_d %l:%M" "date" 10,
+                     Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %cpu% | %memory% | <fc=black>%date%</fc>"
+       }
