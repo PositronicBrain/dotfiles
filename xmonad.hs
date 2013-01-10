@@ -67,7 +67,7 @@ main= do xmproc <- spawnPipe xmobarCmd
                                manageHook defaultConfig,
                   logHook = dynamicLogWithPP $ sjanssenPP
                        { ppOutput = hPutStrLn xmproc,
-                         ppTitle = xmobarColor "blue" "" . shorten 100
+                         ppTitle = xmobarColor "yellow" "" . shorten 100
                   },
                   focusFollowsMouse = True
 

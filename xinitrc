@@ -51,8 +51,8 @@ fi
 # Set up an icon tray
 if [ -x /usr/bin/trayer ]; then
    trayer --edge top --align right --SetDockType true --SetPartialStrut true \
-   --expand true --widthtype pixel --width 224 --transparent false --tint 10 \
-   --height 20 &
+   --expand true --widthtype pixel --width 224 --transparent true --tint 0x000000 \
+   --alpha 0 --height 21 &
 else
     echo 'trayer not found!' | eval $catError
 fi
