@@ -8,8 +8,8 @@ export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
        -Dswing.aatext=true -Dawt.useSystemAAFontSettings=on \
        -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
-keyboardLayout=it
-
+keyboardLayout="it"
+background="/usr/share/backgrounds/gnome/Terraform-green.jpg"
 
 ###### Helper functions #####
 
@@ -65,7 +65,7 @@ ifExistsDo "/usr/bin/unclutter" "unclutter -root -idle 10 -jitter 10"
 # Set the background color
 #xsetroot -solid black
 
-ifExistsDo "/usr/bin/habak" "habak /usr/share/backgrounds/gnome/Terraform-green.jpg"
+ifExistsDo "/usr/bin/habak" "habak $background"
 
 # keyring manager
 ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
