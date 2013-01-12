@@ -1,37 +1,43 @@
 ##### CONFIGURATION VARIABLES #####
-
-export DE="xfce"
-#export SDL_AUDIODRIVER="alsa"
+export SDL_AUDIODRIVER="alsa"
 export SHELL="/bin/bash"
 export EDITOR="emacs"
 export BROWSER="chromium"
-xport LANG=en_US.UTF-8
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp -Dswing.aatext=true -Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+export LANG="en_US.UTF-8"
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
+       -Dswing.aatext=true -Dawt.useSystemAAFontSettings=on \
+       -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
 keyboardLayout=it
 
-###### Startup programs #####
+
+###### Helper functions #####
 
 catError="osd_cat --font=\"-*-dejavu sans-*-*-*-*-30-*-*-*-*-*-*-*\" \
          -p bottom -s2 --offset=500 \
          --indent=500"
 
-#Remove caps lock
-setxkbmap -option ctrl:nocaps
+ifExistsDo () {
+    if [[ -x $1 ]]; then
+        $2 &
+    else
+        echo "$1 not found!" | eval $catError
+    fi
+}
+
+
+
+###### Startup programs #####
+
 
 # set the cursor
-if [ -f /usr/bin/xsetroot ]; then
-    xsetroot -cursor_name left_ptr
-else
-    echo 'xsetroot not found!' | eval $catError
-fi
+ifExistsDo  "/usr/bin/xsetroot" "xsetroot -cursor_name left_ptr"
 
 # set keyboard layout
-if [ -f /usr/bin/setxkbmap ]; then
-    setxkbmap -layout $keyboardLayout
-else
-    echo 'setxkbmap not found!' | eval $catError
-fi
+ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -layout $keyboardLayout"
+
+#Remove caps lock
+ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -option ctrl:nocaps"
 
 # load X resources
 if [ -f $HOME/.Xdefaults ]; then
@@ -44,97 +50,52 @@ if [ -f $HOME/.Xmodmap ]; then
 fi
 
 # start screensaver
-if [ -x /usr/bin/xscreensaver ]; then
-    xscreensaver -no-splash &
-fi
+#ifExistsDo "/usr/bin/xscreensaver" "xscreensaver -no-splash"
 
-# Set up an icon tray
-if [ -x /usr/bin/trayer ]; then
-   trayer --edge top --align right --SetDockType true --SetPartialStrut true \
-   --expand true --widthtype pixel --width 224 --transparent true --tint 0x000000 \
-   --alpha 0 --height 21 &
-else
-    echo 'trayer not found!' | eval $catError
-fi
+#Set up an icon tray
+ifExistsDo "/usr/bin/trayer" \
+   "trayer --edge top --align right \
+    --SetDockType true --SetPartialStrut true \
+    --expand true --widthtype pixel --width 224 --transparent true --tint 0x000000 \
+    --alpha 0 --height 21"
 
 # unclutter removes the mouse after a timeout
-if [ -x /usr/bin/unclutter ]; then
-    unclutter -root -idle 10 -jitter 10 &
-fi
+ifExistsDo "/usr/bin/unclutter" "unclutter -root -idle 10 -jitter 10"
 
 # Set the background color
 #xsetroot -solid black
-if [ -x /usr/bin/habak ]; then
-    habak /usr/share/backgrounds/gnome/Road.jpg &
-else
-    echo 'haback not found!' | eval $catError
-fi
+
+ifExistsDo "/usr/bin/habak" "habak /usr/share/backgrounds/gnome/Terraform-green.jpg"
 
 # keyring manager
-if [ -x /usr/bin/gnome-keyring-daemon ]; then
-    gnome-keyring-daemon  --start
-else
-    echo 'gnome-keyring-daemon not found!' | eval $catError
-fi
-
+ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
 
 # Policy kit authentication agent
-if [ -x /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 ]; then
-    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-else
-    echo 'polkit-gnome-authentication-agent-1 not found!' | eval $catError
-fi
+ifExistsDo "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
 # automount
-if [ -x /usr/bin/thunar ]; then
-thunar --daemon &
-else
-    echo 'thunar not found!' | eval $catError
-fi
+ifExistsDo "/usr/bin/thunar" "thunar --daemon"
 
-if [ -x /usr/bin/nm-applet ]; then
-nm-applet &
-else
-    echo 'nm-applet not found!' | eval $catError
-fi
+ifExistsDo "/usr/bin/nm-applet" "nm-applet"
 
 # Power management
-if [ -x /usr/bin/xfce4-power-manager ]; then
-  xfce4-power-manager &
-fi
+#ifExistsDo  "/usr/bin/xfce4-power-manager"  "xfce4-power-manager"
 
 # gnome bluetooth
-if [ -x /usr/bin/blueman-applet ]; then
-blueman-applet &
-fi
+#ifExistsDo "/usr/bin/blueman-applet" "blueman-applet"
 
 # small volume icon
-if [ -x /usr/bin/volti ]; then
-volti &
-fi
+ifExistsDo "/usr/bin/volti" "volti"
 
 # tracker
-if [ -x /usr/bin/tracker-control ]; then
-tracker-control -s &
-else
-    echo 'tracker not found!' | eval $catError
-fi
+ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
 
 # gtk-redshift
-if [ -x /usr/bin/gtk-redshift ]; then
-gtk-redshift &
-else
-    echo 'gtk-redshift not found!' | eval $catError
-fi
-
-
+ifExistsDo "/usr/bin/gtk-redshift" "gtk-redshift"
 
 # make copy/cut/paste work
-if [ -x /usr/bin/parcellite ]; then
-parcellite & 
-else
-    echo 'parcellite not found!' | eval $catError
-fi
+ifExistsDo "/usr/bin/parcellite" "parcellite"
+
 
 # start xmonad
 exec /usr/bin/xmonad
