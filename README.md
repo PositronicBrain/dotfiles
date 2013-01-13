@@ -1,3 +1,4 @@
-Emacs init file
-===============
-To use it copy it in "~/.emacs.d/".
+Configuration files
+===================
+To install:
+    bash mksymlinks.sh
