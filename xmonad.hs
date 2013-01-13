@@ -1,3 +1,4 @@
+
 -----------------------------------------------------------------------------
 -- |
 -- Copyright   :  (c) Federico Squartini 2012
@@ -138,7 +139,7 @@ myManageHook = (composeAll $ concat $
 -- ^ Where to find the xmobar binary
 
 xmobarCmd :: String
-xmobarCmd = "/usr/bin/xmobar  ~/.xmonad/xmobarrc"
+xmobarCmd = "/usr/bin/xmobar  ~/.xmobarrc"
 
 -- ^ Which terminal to use (evilvte)
 

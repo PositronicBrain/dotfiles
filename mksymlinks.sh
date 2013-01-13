@@ -11,7 +11,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc asoundrc emacs"           # list of files/folders to symlink in homedir
+files="bashrc asoundrc emacs xinit xmobarrc"           # list of files/folders to symlink in homedir
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
@@ -28,3 +28,7 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+# take care of xmonad config
+mv .xmonad/xmonad.hs ~/dotfiles_old/
+ln -s $dir/xmonad.hs ~/.xmonad/xmonad.hs
