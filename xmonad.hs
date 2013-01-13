@@ -33,7 +33,6 @@ import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.IM
 import XMonad.Layout.Grid
 import XMonad.Layout.PerWorkspace
-import XMonad.Layout.Spacing
 import XMonad.Prompt (XPConfig,defaultXPConfig,font,
                       bgColor,
                       fgColor,
@@ -59,9 +58,10 @@ main= do xmproc <- spawnPipe xmobarCmd
                   layoutHook =  avoidStruts $ smartBorders
                                 myLayout,
                   keys = myAltKeymap,
+                  focusedBorderColor = "#f78a00",
                   terminal = myTerminal,
                   mouseBindings      = myMouseBindings,
-                  startupHook = setWMName "LG3D",
+                  -- startupHook = setWMName "LG3D",
                   XMonad.workspaces = ws,
                   manageHook = myManageHook <+> manageDocks <+>
                                manageHook defaultConfig,
@@ -118,13 +118,13 @@ myManageHook = (composeAll $ concat $
         viewShift =  doF . liftM2 (.) W.greedyView W.shift
 
         -- classnames
-        terms = ["Evilvte"]
-        files = ["Thunar","Evince","Gnome-documents","Jabref"]
-        floats  = ["MPlayer","XFontSel","Mplayer2","mplayer2"]
+        terms  = ["Evilvte"]
+        files  = ["Thunar","Evince","Gnome-documents","Jabref"]
+        floats = ["MPlayer","XFontSel","Mplayer2","mplayer2"]
         web    = ["Firefox","Chromium"]
         dev    = ["Emacs","Gitg"]
-        chat	  = ["Pidgin","Buddy List"]
-        gimp	  = ["Gimp"]
+        chat   = ["Pidgin","Buddy List"]
+        gimp   = ["Gimp"]
 
 
         -- resources
