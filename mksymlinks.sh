@@ -29,6 +29,12 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+#xsession should point to xinitrc
+echo "Moving .xsession from ~ to $olddir"
+mv ~/.xsession ~/dotfiles_old/xsession
+echo "Creating symlink to .xsession in home directory."
+ln -s $dir/xinitrc ~/.xsession
+
 # take care of xmonad config
 mv  ~/.xmonad/xmonad.hs ~/dotfiles_old/
 ln -s $dir/xmonad.hs ~/.xmonad/xmonad.hs
