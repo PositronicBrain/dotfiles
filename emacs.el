@@ -1,4 +1,4 @@
-;;; init.el --- an emacs init file
+;;; .emacs.el --- an emacs init file
 ;; Copyright (C) 2012 Federico Squartini
 ;; Maintainer federico.squartini@gmail.com
 
@@ -21,12 +21,12 @@
 (if init-top-level
 
     (let ((init-top-level nil))
-      (if (file-newer-than-file-p "~/.emacs.d/init.el" "~/.emacs.d/init.elc")
+      (if (file-newer-than-file-p "~/.emacs.el" "~/.emacs.elc")
           (progn
-            (load "~/.emacs.d/init.el")
-            (byte-compile-file "~/.emacs.d/init.el")
+            (load "~/.emacs.el")
+            (byte-compile-file "~/.emacs.el")
             )
-        (load "~/.emacs.d/init.elc")))
+        (load "~/.emacs.elc")))
   (progn
     ;; Calculate load time
     (defvar *emacs-load-start* (current-time))
