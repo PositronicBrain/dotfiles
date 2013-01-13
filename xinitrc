@@ -8,7 +8,7 @@ export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
        -Dswing.aatext=true -Dawt.useSystemAAFontSettings=on \
        -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
-keyboardLayout="it"
+keyboardLayout=it
 background="/usr/share/backgrounds/gnome/Terraform-green.jpg"
 
 ###### Helper functions #####
