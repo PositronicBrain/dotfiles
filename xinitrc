@@ -93,6 +93,9 @@ ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
 # gtk-redshift
 ifExistsDo "/usr/bin/gtk-redshift" "gtk-redshift"
 
+# dropbox
+ifExistsDo "/usr/bin/dropboxd" "dropboxd"
+
 # make copy/cut/paste work
 ifExistsDo "/usr/bin/parcellite" "parcellite"
 
