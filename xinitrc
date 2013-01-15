@@ -101,4 +101,4 @@ ifExistsDo "/usr/bin/parcellite" "parcellite"
 
 
 # start xmonad
-exec /usr/bin/xmonad
+exec dbus-launch /usr/bin/xmonad
