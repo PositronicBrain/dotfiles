@@ -1,4 +1,4 @@
-export PATH=$PATH:/home/federico/.cabal/bin
+export PATH=$PATH:/sbin:/usr/sbin:/home/federico/.cabal/bin
 export TEXINPUTS=.:$TEXINPUTS
 export USER=`id -un`
 export HOSTNAME=`hostname`
