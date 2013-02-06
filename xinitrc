@@ -29,6 +29,8 @@ ifExistsDo () {
 
 ###### Startup programs #####
 
+# Enable restarting x
+ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -option terminate:ctrl_alt_bksp"
 
 # set the cursor
 ifExistsDo  "/usr/bin/xsetroot" "xsetroot -cursor_name left_ptr"
@@ -99,6 +101,11 @@ ifExistsDo "/usr/bin/dropboxd" "dropboxd"
 # make copy/cut/paste work
 ifExistsDo "/usr/bin/parcellite" "parcellite"
 
+# rss reader
+ifExistsDo "/usr/bin/liferea" "liferea"
+
+# Virtualbox guest additions
+ifExistsDo "/usr/bin/VBoxClient-all" "VBoxClient-all"
 
 # start xmonad
 exec dbus-launch /usr/bin/xmonad
