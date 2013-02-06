@@ -37,4 +37,5 @@ ln -s $dir/xinitrc ~/.xsession
 
 # take care of xmonad config
 mv  ~/.xmonad/xmonad.hs ~/dotfiles_old/
+mkdir -p ~/.xmonad
 ln -s $dir/xmonad.hs ~/.xmonad/xmonad.hs
