@@ -1,0 +1,70 @@
+
+ao=alsa #audio out
+#mixer-channel="Master"
+srate=48000
+
+vo="vaapi" #video out
+zoom="1" #Allow sofware scaling if I use x11 for vo
+sid="0" #subtitle set
+
+#Display
+
+double="yes" #double buffering(recommended for subtitles)
+monitoraspect="16:9" #I'm on a widescreen laptop so keeps 4:3 content from stretching
+#framedrop="1" # For slow machines
+hardframedrop="0" #Make sure hard frame drop is off but can turn on easily now
+
+
+# Text-based subtitles
+#=====================
+
+# Find subtitle files. (1: load all subs containing movie name)
+sub-fuzziness=1
+
+# Set font.
+font=DejaVuSans
+
+# Set font encoding.
+subfont-encoding=unicode
+
+# Set subtitle file encoding.
+unicode=yes
+utf8=yes
+
+# Resample the font alphamap. (1: narrow black outline)
+ffactor=1
+
+# Set subtitle position. (100: as low as possible)
+subpos=95
+
+# Set subtitle alignment at its position. (2: bottom)
+subalign=2
+
+# Set font size. (2: proportional to movie width)
+subfont-autoscale=1
+
+# Set font blur radius. (default: 2)
+subfont-blur=2.0
+
+# Set font outline thickness. (default: 2)
+subfont-outline=2.0
+
+# Set autoscale coefficient. (default: 5)
+subfont-text-scale=5
+#This sets the postprocessing into overdrive using all possible spare cpu cycles to make the movie look better
+autoq=100
+#vf=pp=de,hqdn3d
+
+
+#always keep mplayer on top
+ontop="1"
+
+#turns off xscreen saver...maybe
+stop-xscreensaver="yes"
+
+#Fix A/V sync problems on files with bad MP3 VBR audio
+#mc="1"
+#autosync="10"
+#delay="0.5"
+
+

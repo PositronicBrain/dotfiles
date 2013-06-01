@@ -11,7 +11,8 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc asoundrc emacs.el xinitrc xmobarrc"   # list of files/folders to symlink in homedir
+# list of files/folders to symlink in homedir
+files="bashrc asoundrc emacs.el xinitrc xmobarrc gitconfig muttrc" 
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
@@ -39,3 +40,9 @@ ln -s $dir/xinitrc ~/.xsession
 mv  ~/.xmonad/xmonad.hs ~/dotfiles_old/
 mkdir -p ~/.xmonad
 ln -s $dir/xmonad.hs ~/.xmonad/xmonad.hs
+
+
+# mplayer config
+mv  ~/.mplayer/config ~/dotfiles_old/mplayer
+mkdir -p ~/.mplayer
+ln -s $dir/mplayer ~/.mplayer/config
