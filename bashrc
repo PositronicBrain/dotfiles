@@ -2,10 +2,9 @@ export PATH=$PATH:/sbin:/usr/sbin:/home/federico/.cabal/bin
 export TEXINPUTS=.:$TEXINPUTS
 export USER=`id -un`
 export HOSTNAME=`hostname`
-export EDITOR="emacs"
-export BROWSER="chromium"
+export EDITOR="vi"
+export BROWSER="firefox"
 export SDL_AUDIODRIVER="alsa"
-export JAVA_HOME="/opt/java/jre"
 export PAGER='less'
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
                       -Dswing.aatext=true -Dawt.useSystemAAFontSettings=on \
@@ -28,12 +27,12 @@ shopt -s cmdhist
 shopt -s histappend histreedit histverify
 
 #colorize output
-eval `dircolors ~/.dircolors`
+#eval `dircolors ~/.dircolors`
 
 #bash file completion
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-    .  /usr/share/bash-completion/bash_completion
-fi
+#if [ -f /usr/share/bash-completion/bash_completion ]; then
+#    .  /usr/share/bash-completion/bash_completion
+#fi
 
 # Nobody should read my files
 umask 077
@@ -46,19 +45,6 @@ PS1="\[\e[1;32m\][\u @ \h \w]\[\e[0m\]\n$ "
 alias cp='cp -vi'
 alias rm='rm -vi'
 alias mv='mv -vi'
-# Add colors for filetype and  human-readable sizes by default on 'ls':
-alias ls='ls -h --color'
-alias lx='ls -lXB'         #  Sort by extension.
-alias lk='ls -lSr'         #  Sort by size, biggest last.
-alias lt='ls -ltr'         #  Sort by date, most recent last.
-alias lc='ls -ltcr'        #  Sort by/show change time,most recent last.
-alias lu='ls -ltur'        #  Sort by/show access time,most recent last.
-alias ll="ls -lv --group-directories-first"
-alias lm='ll |more'        #  Pipe through 'more'
-alias lr='ll -R'           #  Recursive ls.
-alias la='ll -A'           #  Show hidden files.
-
-alias back='cd $OLDPWD'
 
 # Nice colors for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -72,8 +58,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 #greeting message
 if [[ -x /usr/bin/fortune &&  -x /usr/bin/cowsay ]]; then
-    fortune -a | \
-        cowsay -f $(/bin/ls /usr/share/cows -1 | \
-        head -n $(expr $$$(date +%s) % $(ls /usr/share/cows | wc -w) + 1) | \
-        tail -n 1)
+  dir='/usr/share/cows/'
+  file=`/bin/ls -1 "$dir" | sort --random-sort | head -1`
+  cow=$(echo "$file" | sed -e "s/\.cow//")
+  /usr/bin/fortune -as | cowsay -f $cow
 fi
