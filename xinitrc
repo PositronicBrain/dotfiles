@@ -1,14 +1,14 @@
 ##### CONFIGURATION VARIABLES #####
 export SDL_AUDIODRIVER="alsa"
 export SHELL="/bin/bash"
-export EDITOR="emacs"
-export BROWSER="chromium"
+export EDITOR="vi"
+export BROWSER="firefox"
 export LANG="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
        -Dswing.aatext=true -Dawt.useSystemAAFontSettings=on \
        -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
-keyboardLayout=it
+keyboardLayout=us
 background="/usr/share/backgrounds/gnome/Terraform-green.jpg"
 
 ###### Helper functions #####
@@ -78,7 +78,7 @@ ifExistsDo "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "/usr/lib
 # automount
 ifExistsDo "/usr/bin/thunar" "thunar --daemon"
 
-ifExistsDo "/usr/bin/nm-applet" "nm-applet"
+#ifExistsDo "/usr/bin/nm-applet" "nm-applet"
 
 # Power management
 #ifExistsDo  "/usr/bin/xfce4-power-manager"  "xfce4-power-manager"
@@ -101,11 +101,9 @@ ifExistsDo "/usr/bin/dropboxd" "dropboxd"
 # make copy/cut/paste work
 ifExistsDo "/usr/bin/parcellite" "parcellite"
 
-# rss reader
-ifExistsDo "/usr/bin/liferea" "liferea"
-
 # Virtualbox guest additions
-ifExistsDo "/usr/bin/VBoxClient-all" "VBoxClient-all"
+#ifExistsDo "/usr/bin/VBoxClient-all" "VBoxClient-all"
 
 # start xmonad
-exec dbus-launch /usr/bin/xmonad
+#exec dbus-launch /usr/bin/xmonad
+
