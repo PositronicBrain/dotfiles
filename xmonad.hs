@@ -168,8 +168,8 @@ menu = sort ["arandr",
              "jabref",
              "pidgin",
              "xscreensaver-demo",
-             "chromium",
-             "gthumb",
+             "firefox",
+             "geeqie",
              "thunderbird",
              "transmission-gtk"]
 
