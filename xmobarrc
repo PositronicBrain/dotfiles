@@ -2,12 +2,16 @@ Config { font = "xft:Bitstream Vera Sans:pixelsize=12:antialias=true",
          bgColor = "black",
          fgColor = "white",
          position = Static { xpos = 0 , ypos = 0, width = 1600, height = 21 },
-         commands = [Run Cpu ["-L","3","-H","50","--normal","green","--high","red"]   10,
+         commands = [Run MultiCpu ["-t", "CPU: <total0>% <total1>% <total2>% <total3>%","-L","3","-H","50","--normal","green","--high","red"]   10,
                      Run Memory ["-t","Mem: <usedratio>%","--normal","green","--high","red"] 10,
-                     Run Date "%a %b %_d %l:%M" "date" 10,
+                     Run CpuFreq ["-t", "Freq:<cpu0> <cpu1> <cpu2> <cpu3>", "-L","0","-H","2","-l","green","-h","red"] 50,
+                     Run ThermalZone 0 ["-t","CPU: <temp> C"] 30,
+                     Run ThermalZone 1 ["-t","Mobo: <temp> C"] 30,
+                     Run Date "%a %b %_d %l:%M" "date" 30,
                      Run StdinReader
                     ]
+
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% | %date%"
+       , template = "%StdinReader% }{ %multicpu% | %memory% | %cpufreq% | %thermal0% | %thermal1% | %date%"
        }
