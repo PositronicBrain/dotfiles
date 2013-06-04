@@ -35,6 +35,9 @@ ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -option terminate:ctrl_alt_bksp"
 # set the cursor
 ifExistsDo  "/usr/bin/xsetroot" "xsetroot -cursor_name left_ptr"
 
+# set the background
+ifExistsDo "/usr/bin/xsetroot" "xsetroot -mod 16 16 -fg black -bg steelblue"
+
 # set keyboard layout
 ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -layout $keyboardLayout"
 
@@ -63,11 +66,6 @@ ifExistsDo "/usr/bin/trayer" \
 
 # unclutter removes the mouse after a timeout
 ifExistsDo "/usr/bin/unclutter" "unclutter -root -idle 10 -jitter 10"
-
-# Set the background color
-#xsetroot -solid black
-
-ifExistsDo "/usr/bin/habak" "habak $background"
 
 # keyring manager
 ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
