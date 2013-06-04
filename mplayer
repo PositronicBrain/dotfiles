@@ -50,7 +50,7 @@ subfont-blur=2.0
 subfont-outline=2.0
 
 # Set autoscale coefficient. (default: 5)
-subfont-text-scale=5
+subfont-text-scale=7
 #This sets the postprocessing into overdrive using all possible spare cpu cycles to make the movie look better
 autoq=100
 #vf=pp=de,hqdn3d
