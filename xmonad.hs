@@ -77,8 +77,8 @@ main= do xmproc <- spawnPipe xmobarCmd
 -- ^ Workspace names
 
 ws :: [WorkspaceId]
-ws = ["1:terms","2:emacs","3:web","4:files","5:chat","6:gimp"] ++
-     map show [7..9::Int]
+ws = ["1:terms","2:emacs","3:web","4:files","5:chat",
+      "6:gimp","7:inkscape","8:blender","9:vbox"]
 
 -- ^ Layout order
 
@@ -104,29 +104,34 @@ myLayout = onWorkspace "5:chat" pidginLayout $ tiled ||| Full ||| Mirror tiled
 -- ^ Program/Workspace hooks
 myManageHook :: ManageHook
 myManageHook = (composeAll $ concat $
-    [ [resource     =? r            --> doIgnore             |   r   <- myIgnores]
-    , [className    =? c            --> viewShift "1:terms"  |   c   <- terms    ]
-    , [className    =? c            --> viewShift "2:emacs"  |   c   <- dev      ]
-    , [className    =? c            --> viewShift "3:web"    |   c   <- web      ]
-    , [className    =? c            --> viewShift "4:files"  |   c   <- files    ]
-    , [className    =? c            --> viewShift "5:chat"   |   c   <- chat     ]
-    , [className    =? c            --> viewShift "6:gimp"   |   c   <- gimp     ]
-    , [className    =? c            --> doCenterFloat        |   c   <- floats   ]
-    , [isFullscreen                 --> myDoFullFloat                            ]
+    [ [resource     =? r            --> doIgnore               |   r   <- myIgnores]
+    , [className    =? c            --> viewShift "1:terms"    |   c   <- terms    ]
+    , [className    =? c            --> viewShift "2:emacs"    |   c   <- dev      ]
+    , [className    =? c            --> viewShift "3:web"      |   c   <- web      ]
+    , [className    =? c            --> viewShift "4:files"    |   c   <- files    ]
+    , [className    =? c            --> viewShift "5:chat"     |   c   <- chat     ]
+    , [className    =? c            --> viewShift "6:gimp"     |   c   <- gimp     ]
+    , [className    =? c            --> viewShift "7:inkscape" |   c   <- inkscape ]
+    , [className    =? c            --> viewShift "8:blender"  |   c   <- blender  ]
+    , [className    =? c            --> viewShift "9:vbox"     |   c   <- vbox     ]
+    , [className    =? c            --> doCenterFloat          |   c   <- floats   ]
+    , [isFullscreen                 --> myDoFullFloat                              ]
     ]) <+> manageDocks
 
     where
         viewShift =  doF . liftM2 (.) W.greedyView W.shift
 
         -- classnames
-        terms  = ["Evilvte"]
-        files  = ["Thunar","Evince","Gnome-documents","Jabref"]
-        floats = ["MPlayer","XFontSel","Mplayer2","mplayer2"]
-        web    = ["Firefox","Chromium"]
-        dev    = ["Emacs","Gitg"]
-        chat   = ["Pidgin","Buddy List"]
-        gimp   = ["Gimp"]
-
+        terms    = ["Evilvte"]
+        files    = ["Thunar","Evince","Gnome-documents","Jabref"]
+        floats   = ["MPlayer","XFontSel","Mplayer2","mplayer2"]
+        web      = ["Firefox","Chromium"]
+        dev      = ["Emacs","Gitg"]
+        chat     = ["Pidgin","Buddy List"]
+        gimp     = ["Gimp"]
+        inkscape = ["Inkscape"]
+        blender  = ["Blender"]
+        vbox     = ["VirtualBox"]
 
         -- resources
         myIgnores = []
@@ -166,11 +171,17 @@ menu = sort ["arandr",
              "gnome-documents",
              "seahorse",
              "jabref",
+             "gpick",
              "pidgin",
              "xscreensaver-demo",
              "firefox",
              "geeqie",
+             "inkscape",
+             "blender",
+             "gimp",
+             "gtk2fontsel",
              "thunderbird",
+             "virtualbox",
              "transmission-gtk"]
 
 
