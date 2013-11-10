@@ -27,18 +27,22 @@ shopt -s cmdhist
 shopt -s histappend histreedit histverify
 
 #colorize output
-#eval `dircolors ~/.dircolors`
-
-#bash file completion
-#if [ -f /usr/share/bash-completion/bash_completion ]; then
-#    .  /usr/share/bash-completion/bash_completion
-#fi
+eval `dircolors ~/.dir_colors`
 
 # Nobody should read my files
-umask 077
+umask 057
+
+#bash file completion
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+    source  /usr/share/bash-completion/bash_completion
+fi
+
+if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
+    source  /usr/share/git/completion/git-prompt.sh
+fi
 
 #prompt
-PS1="\[\e[1;32m\][\u @ \h \w]\[\e[0m\]\n$ "
+export PS1='\[\e[1;32m\][\u @ \h \w$(__git_ps1 " (%s)")]\[\e[0m\]\n$ '
 
 #Aliases
 
