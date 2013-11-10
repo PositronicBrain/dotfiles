@@ -1,5 +1,5 @@
 ##### CONFIGURATION VARIABLES #####
-export SDL_AUDIODRIVER="alsa"
+#export SDL_AUDIODRIVER="alsa"
 export SHELL="/bin/bash"
 export EDITOR="vi"
 export BROWSER="firefox"
@@ -45,12 +45,12 @@ ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -layout $keyboardLayout"
 ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -option ctrl:nocaps"
 
 # load X resources
-if [ -f $HOME/.Xdefaults ]; then
+if [[ -f $HOME/.Xdefaults ]]; then
   xrdb -merge $HOME/.Xdefaults
 fi
 
 # load customizations to keyboard map
-if [ -f $HOME/.Xmodmap ]; then
+if [[ -f $HOME/.Xmodmap ]]; then
     /usr/bin/xmodmap $HOME/.Xmodmap
 fi
 
@@ -61,7 +61,7 @@ fi
 ifExistsDo "/usr/bin/trayer" \
    "trayer --edge top --align right \
     --SetDockType true --SetPartialStrut true \
-    --expand true --widthtype pixel --width 224 --transparent true --tint 0x000000 \
+    --expand true --widthtype pixel --width 260 --transparent true --tint 0x000000 \
     --alpha 0 --height 21"
 
 # unclutter removes the mouse after a timeout
@@ -103,5 +103,5 @@ ifExistsDo "/usr/bin/parcellite" "parcellite"
 #ifExistsDo "/usr/bin/VBoxClient-all" "VBoxClient-all"
 
 # start xmonad
-#exec dbus-launch /usr/bin/xmonad
+exec dbus-launch /usr/bin/xmonad
 
