@@ -179,7 +179,7 @@ menu = sort ["arandr",
              "inkscape",
              "blender",
              "gimp",
-             "gtk2fontsel",
+             "font-manager",
              "thunderbird",
              "virtualbox",
              "transmission-gtk"]
