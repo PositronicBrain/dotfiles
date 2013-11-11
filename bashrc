@@ -19,6 +19,8 @@ set -o notify
 set -o noclobber
 # ignore CTRL-D
 set -o ignoreeof
+# use vi keybindings
+set -o vi
 
 shopt -s checkwinsize
 shopt -s cdspell
@@ -37,6 +39,7 @@ if [[ -f /usr/share/bash-completion/bash_completion ]]; then
     source  /usr/share/bash-completion/bash_completion
 fi
 
+# Add a function to show git current branch in the prompt
 if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
     source  /usr/share/git/completion/git-prompt.sh
 fi
