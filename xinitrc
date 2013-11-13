@@ -102,6 +102,3 @@ ifExistsDo "/usr/bin/parcellite" "parcellite"
 # Virtualbox guest additions
 #ifExistsDo "/usr/bin/VBoxClient-all" "VBoxClient-all"
 
-# start xmonad
-exec dbus-launch /usr/bin/xmonad
-
