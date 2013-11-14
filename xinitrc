@@ -1,7 +1,7 @@
 ##### CONFIGURATION VARIABLES #####
-#export SDL_AUDIODRIVER="alsa"
+export SDL_AUDIODRIVER="pulse"
 export SHELL="/bin/bash"
-export EDITOR="vi"
+export EDITOR="vim"
 export BROWSER="firefox"
 export LANG="en_US.UTF-8"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
@@ -53,7 +53,6 @@ fi
 if [[ -f $HOME/.Xmodmap ]]; then
     /usr/bin/xmodmap $HOME/.Xmodmap
 fi
-
 # start screensaver
 #ifExistsDo "/usr/bin/xscreensaver" "xscreensaver -no-splash"
 
@@ -68,7 +67,7 @@ ifExistsDo "/usr/bin/trayer" \
 ifExistsDo "/usr/bin/unclutter" "unclutter -root -idle 10 -jitter 10"
 
 # keyring manager
-ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
+ ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
 
 # Policy kit authentication agent
 ifExistsDo "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
@@ -84,11 +83,14 @@ ifExistsDo "/usr/bin/thunar" "thunar --daemon"
 # gnome bluetooth
 #ifExistsDo "/usr/bin/blueman-applet" "blueman-applet"
 
+#Pulse sound server
+ifExistsDo "start-pulseaudio-x11" "pulse"
+
 # small volume icon
-ifExistsDo "/usr/bin/volti" "volti"
+ifExistsDo "/usr/bin/pnmixer" "pnmixer"
 
 # tracker
-ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
+#ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
 
 # gtk-redshift
 ifExistsDo "/usr/bin/gtk-redshift" "gtk-redshift"
@@ -102,3 +104,5 @@ ifExistsDo "/usr/bin/parcellite" "parcellite"
 # Virtualbox guest additions
 #ifExistsDo "/usr/bin/VBoxClient-all" "VBoxClient-all"
 
+#Window manager
+exec dbus-launch --exit-with-session xmonad

@@ -2,9 +2,9 @@ export PATH=$PATH:/sbin:/usr/sbin:/home/federico/.cabal/bin
 export TEXINPUTS=.:$TEXINPUTS
 export USER=`id -un`
 export HOSTNAME=`hostname`
-export EDITOR="vi"
+export EDITOR="vim"
 export BROWSER="firefox"
-export SDL_AUDIODRIVER="alsa"
+export SDL_AUDIODRIVER="pulse"
 export PAGER='less'
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
                       -Dswing.aatext=true -Dawt.useSystemAAFontSettings=on \
