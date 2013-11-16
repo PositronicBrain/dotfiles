@@ -1,18 +1,9 @@
-export PATH=$PATH:/sbin:/usr/sbin:/home/federico/.cabal/bin
-export TEXINPUTS=.:$TEXINPUTS
-export USER=`id -un`
-export HOSTNAME=`hostname`
-export EDITOR="vim"
-export BROWSER="firefox"
-export SDL_AUDIODRIVER="pulse"
-export PAGER='less'
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
-                      -Dswing.aatext=true -Dawt.useSystemAAFontSettings=on \
-                      -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
-export HISTSIZE=1000
-export HISTCONTROL=ignoredups
-export HISTIGNORE="bg:fg:ls:cd:history"
-export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
+TEXINPUTS=.:$TEXINPUTS
+USER=`id -un`
+HISTSIZE=1000
+HISTCONTROL=ignoredups
+HISTIGNORE="bg:fg:ls:cd:history"
+TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
 
 set -o notify
 # do not overwrite files with >
@@ -52,15 +43,17 @@ export PS1='\[\e[1;32m\][\u @ \h \w$(__git_ps1 " (%s)")]\[\e[0m\]\n$ '
 alias cp='cp -vi'
 alias rm='rm -vi'
 alias mv='mv -vi'
+# colorize output of ls with dircolor
+alias ls='ls --color=auto'
 
 # Nice colors for manpages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+LESS_TERMCAP_mb=$'\E[01;31m'
+LESS_TERMCAP_md=$'\E[01;31m'
+LESS_TERMCAP_me=$'\E[0m'
+LESS_TERMCAP_se=$'\E[0m'
+LESS_TERMCAP_so=$'\E[01;44;33m'
+LESS_TERMCAP_ue=$'\E[0m'
+LESS_TERMCAP_us=$'\E[01;32m'
 
 
 #greeting message

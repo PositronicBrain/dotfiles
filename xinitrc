@@ -1,4 +1,5 @@
-##### CONFIGURATION VARIABLES #####
+##### GLOBAL CONFIGURATION VARIABLES #####
+export PATH=$PATH:/sbin:/usr/sbin:/home/federico/.cabal/bin
 export SDL_AUDIODRIVER="pulse"
 export SHELL="/bin/bash"
 export EDITOR="vim"
