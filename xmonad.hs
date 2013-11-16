@@ -124,7 +124,8 @@ myManageHook = (composeAll $ concat $
         -- classnames
         terms    = ["Evilvte"]
         files    = ["Thunar","Evince","Gnome-documents","Jabref"]
-        floats   = ["MPlayer","XFontSel","Mplayer2","mplayer2"]
+        floats   = ["MPlayer","XFontSel","Mplayer2","mplayer2",
+                    "Default - Wine desktop","Wine"]
         web      = ["Firefox","Chromium"]
         dev      = ["Emacs","Gitg"]
         chat     = ["Pidgin","Buddy List"]
@@ -132,7 +133,7 @@ myManageHook = (composeAll $ concat $
         inkscape = ["Inkscape"]
         blender  = ["Blender"]
         vbox     = ["VirtualBox"]
-
+        --
         -- resources
         myIgnores = []
 
