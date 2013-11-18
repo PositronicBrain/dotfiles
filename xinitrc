@@ -85,7 +85,7 @@ ifExistsDo "/usr/bin/thunar" "thunar --daemon"
 #ifExistsDo "/usr/bin/blueman-applet" "blueman-applet"
 
 #Pulse sound server
-ifExistsDo "pulseaudio --start" "pulse"
+ifExistsDo "/usr/bin/start-pulseaudio-x11" "start-pulseaudio-x11"
 
 # small volume icon
 ifExistsDo "/usr/bin/pnmixer" "pnmixer"
