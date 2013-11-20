@@ -22,6 +22,9 @@ ontop="1"
 #turns off xscreen saver...maybe
 stop-xscreensaver="yes"
 
+# set the window title
+use-filename-title=yes
+
 #Fix A/V sync problems on files with bad MP3 VBR audio
 #mc="1"
 #autosync="10"
