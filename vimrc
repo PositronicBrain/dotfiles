@@ -33,3 +33,9 @@ set title
 " set ruler
 set textwidth=72
 colorscheme 256-jungle
+
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files
+" defaults to  'plaintex' instead of 'tex'
+let g:tex_flavor='latex'
+
