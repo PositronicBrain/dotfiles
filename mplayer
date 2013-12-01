@@ -1,6 +1,7 @@
 ao=pulse #audio out
 #mixer-channel="Master"
 srate=48000
+af=scaletempo
 
 vo="vaapi" #video output driver
 va="vaapi" #video decoder driver
