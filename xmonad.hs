@@ -77,7 +77,7 @@ main= do xmproc <- spawnPipe xmobarCmd
 -- ^ Workspace names
 
 ws :: [WorkspaceId]
-ws = ["1:terms","2:emacs","3:web","4:files","5:chat",
+ws = ["1:terms","2:audio","3:web","4:files","5:chat",
       "6:gimp","7:inkscape","8:blender","9:vbox"]
 
 -- ^ Layout order
@@ -106,7 +106,7 @@ myManageHook :: ManageHook
 myManageHook = (composeAll $ concat $
     [ [resource     =? r            --> doIgnore               |   r   <- myIgnores]
     , [className    =? c            --> viewShift "1:terms"    |   c   <- terms    ]
-    , [className    =? c            --> viewShift "2:emacs"    |   c   <- dev      ]
+    , [className    =? c            --> viewShift "2:audio"    |   c   <- audio      ]
     , [className    =? c            --> viewShift "3:web"      |   c   <- web      ]
     , [className    =? c            --> viewShift "4:files"    |   c   <- files    ]
     , [className    =? c            --> viewShift "5:chat"     |   c   <- chat     ]
@@ -114,7 +114,8 @@ myManageHook = (composeAll $ concat $
     , [className    =? c            --> viewShift "7:inkscape" |   c   <- inkscape ]
     , [className    =? c            --> viewShift "8:blender"  |   c   <- blender  ]
     , [className    =? c            --> viewShift "9:vbox"     |   c   <- vbox     ]
-    , [className    =? c            --> doCenterFloat          |   c   <- floats   ]
+    , [className    =? c            --> doCenterFloat          |   c   <- cfloats  ]
+    , [className    =? c            --> doFloat                |   c   <- floats   ]
     , [isFullscreen                 --> myDoFullFloat                              ]
     ]) <+> manageDocks
 
@@ -124,15 +125,17 @@ myManageHook = (composeAll $ concat $
         -- classnames
         terms    = ["Evilvte"]
         files    = ["Thunar","Evince","Gnome-documents","Jabref"]
-        floats   = ["MPlayer","XFontSel","Mplayer2","mplayer2",
+        cfloats   = ["MPlayer","XFontSel","Mplayer2","mplayer2",
                     "Default - Wine desktop","Wine"]
+        floats   = ["Mini (bristol)","Bristol gui","BasicWin","Mini",
+                    "Alsa-tray","Qsynth","Vmpk","Yoshimi","Qjackctl","Hydrogen","Amsynth","Aeolus"]
         web      = ["Firefox","Chromium"]
-        dev      = ["Emacs","Gitg"]
         chat     = ["Pidgin","Buddy List"]
         gimp     = ["Gimp"]
         inkscape = ["Inkscape"]
         blender  = ["Blender"]
         vbox     = ["VirtualBox"]
+        audio    = ["Amsynth","Aeolus","Qjackctl","vmpk","Hydrogen","BasicWin","Qsynth","Vmpk","Yoshimi"]
         --
         -- resources
         myIgnores = []
@@ -167,6 +170,20 @@ menu = sort ["arandr",
              "quodlibet",
              "thunar",
              "emacs",
+             "vmpk",
+             "yoshimi",
+             "amsynth",
+             "aeolus",
+             "startBristol -mini -quality 8 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "startBristol -odyssey -quality 8 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "startBristol -arp2600 -quality 6 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "startBristol -dx -quality 8 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "startBristol -solina -quality 8 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "startBristol -juno -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "startBristol -prophet -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "startBristol -obx -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "startBristol -b3 -quality 6 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             "hydrogen",
              "baobab",
              "gnome-disks",
              "paprefs",
