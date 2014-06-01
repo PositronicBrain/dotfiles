@@ -1,6 +1,7 @@
 ##### GLOBAL CONFIGURATION VARIABLES #####
 export PATH=$PATH:/sbin:/usr/sbin:/home/federico/.cabal/bin
-export SDL_AUDIODRIVER="pulse"
+export SDL_AUDIODRIVER="alsa"
+QT_STYLE_OVERRIDE="gtk"
 export SHELL="/bin/bash"
 export EDITOR="vim"
 export BROWSER="firefox"
@@ -84,12 +85,18 @@ ifExistsDo "/usr/bin/thunar" "thunar --daemon"
 # gnome bluetooth
 #ifExistsDo "/usr/bin/blueman-applet" "blueman-applet"
 
-#Pulse sound server
-ifExistsDo "/usr/bin/start-pulseaudio-x11" "start-pulseaudio-x11"
+# Jack sound server
+jack_control start
+#sudo schedtool -R -p 20 `pidof jackdbus`
+jack_control eps realtime true
+jack_control ds alsa
+jack_control dps device hw:0,0
+#jack_control dps rate 48000
+#jack_control dps nperiods 2
+#jack_control dps period 64
+ifExistsDo "/usr/bin/qjackctl" "qjackctl"
 
-# small volume icon
-ifExistsDo "/usr/bin/pnmixer" "pnmixer"
-
+ifExistsDo "/usr/bin/alsa-tray" "alsa-tray"
 # tracker
 #ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
 
