@@ -1,7 +1,7 @@
 ##### GLOBAL CONFIGURATION VARIABLES #####
 export PATH=$PATH:/sbin:/usr/sbin:/home/federico/.cabal/bin
 export SDL_AUDIODRIVER="alsa"
-QT_STYLE_OVERRIDE="gtk"
+export QT_STYLE_OVERRIDE="gtk"
 export SHELL="/bin/bash"
 export EDITOR="vim"
 export BROWSER="firefox"
@@ -108,6 +108,10 @@ ifExistsDo "/usr/bin/dropboxd" "dropboxd"
 
 # make copy/cut/paste work
 ifExistsDo "/usr/bin/parcellite" "parcellite"
+
+# audio player
+ifExistsDo "/usr/bin/quodlibet" "quodlibet"
+
 
 # Virtualbox guest additions
 #ifExistsDo "/usr/bin/VBoxClient-all" "VBoxClient-all"
