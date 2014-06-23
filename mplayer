@@ -1,4 +1,4 @@
-ao=pulse #audio out
+ao=jack #audio out
 #mixer-channel="Master"
 srate=48000
 af=scaletempo
