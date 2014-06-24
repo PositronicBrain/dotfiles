@@ -101,7 +101,7 @@ ifExistsDo "/usr/bin/alsa-tray" "alsa-tray"
 #ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
 
 # gtk-redshift
-ifExistsDo "/usr/bin/gtk-redshift" "gtk-redshift"
+ifExistsDo "/usr/bin/redshift-gtk" "redshift-gtk"
 
 # dropbox
 ifExistsDo "/usr/bin/dropboxd" "dropboxd"
