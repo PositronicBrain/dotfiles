@@ -11,7 +11,6 @@ export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=gasp \
        -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
 keyboardLayout=us
-background="/usr/share/backgrounds/gnome/Terraform-green.jpg"
 
 ###### Helper functions #####
 
@@ -38,7 +37,7 @@ ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -option terminate:ctrl_alt_bksp"
 ifExistsDo  "/usr/bin/xsetroot" "xsetroot -cursor_name left_ptr"
 
 # set the background
-ifExistsDo "/usr/bin/xsetroot" "xsetroot -mod 16 16 -fg black -bg steelblue"
+ifExistsDo "/usr/bin/nitrogen" "nitrogen --restore"
 
 # set keyboard layout
 ifExistsDo  "/usr/bin/setxkbmap" "setxkbmap -layout $keyboardLayout"
@@ -63,27 +62,19 @@ ifExistsDo "/usr/bin/trayer" \
    "trayer --edge top --align right \
     --SetDockType true --SetPartialStrut true \
     --expand true --widthtype pixel --width 260 --transparent true --tint 0x000000 \
-    --alpha 0 --height 21"
+    --alpha 0 --height 25"
 
 # unclutter removes the mouse after a timeout
 ifExistsDo "/usr/bin/unclutter" "unclutter -root -idle 10 -jitter 10"
 
 # keyring manager
- ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
+ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
 
 # Policy kit authentication agent
 ifExistsDo "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
 # automount
 ifExistsDo "/usr/bin/thunar" "thunar --daemon"
-
-#ifExistsDo "/usr/bin/nm-applet" "nm-applet"
-
-# Power management
-#ifExistsDo  "/usr/bin/xfce4-power-manager"  "xfce4-power-manager"
-
-# gnome bluetooth
-#ifExistsDo "/usr/bin/blueman-applet" "blueman-applet"
 
 # Jack sound server
 jack_control start
@@ -100,18 +91,14 @@ ifExistsDo "/usr/bin/alsa-tray" "alsa-tray"
 # tracker
 #ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
 
-# gtk-redshift
-ifExistsDo "/usr/bin/redshift-gtk" "redshift-gtk"
-
 # dropbox
 ifExistsDo "/usr/bin/dropboxd" "dropboxd"
-
-# make copy/cut/paste work
-ifExistsDo "/usr/bin/parcellite" "parcellite"
 
 # audio player
 ifExistsDo "/usr/bin/quodlibet" "quodlibet"
 
+# gtk-redshift
+ifExistsDo "/usr/bin/redshift-gtk" "redshift-gtk"
 
 # Virtualbox guest additions
 #ifExistsDo "/usr/bin/VBoxClient-all" "VBoxClient-all"

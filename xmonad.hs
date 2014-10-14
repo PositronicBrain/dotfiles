@@ -1,4 +1,3 @@
-
 -----------------------------------------------------------------------------
 -- |
 -- Copyright   :  (c) Federico Squartini 2012
@@ -10,75 +9,53 @@ module Main where
 
 import Control.Monad  (liftM2)
 import Data.List (sort)
-import qualified Data.Map as M
 
 import XMonad
-import XMonad.Actions.CycleWS (shiftToNext, nextWS,
-                               shiftToPrev, prevWS,
-                               nextScreen)
 import XMonad.Actions.GridSelect (defaultGSConfig,
                                   spawnSelected)
-import XMonad.Actions.Search (SearchEngine, dictionary,
-                              google, hackage, isohunt,
-                              maps, thesaurus,
-                              wikipedia, youtube,
-                              selectSearch, promptSearch)
-import XMonad.Actions.WindowGo (raiseBrowser, raiseEditor, raiseMaybe)
-import XMonad.Hooks.DynamicLog (dynamicLogWithPP,
-                                ppOutput,ppTitle,
-                                shorten,sjanssenPP,xmobarColor)
+import XMonad.Actions.WindowGo (raiseBrowser)
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers(isFullscreen ,doFullFloat, doCenterFloat,doFullFloat)
+import XMonad.Hooks.ManageHelpers(isFullscreen,doFullFloat,doCenterFloat,doFullFloat)
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.IM
 import XMonad.Layout.Grid
 import XMonad.Layout.PerWorkspace
-import XMonad.Prompt (XPConfig,defaultXPConfig,font,
-                      bgColor,
-                      fgColor,
-                      borderColor)
+import XMonad.Prompt
 import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Ssh (sshPrompt)
 import XMonad.Prompt.Shell (shellPrompt)
-import XMonad.StackSet as W (focusUp, focusDown, sink,shift,
-                             swapUp,swapDown,shiftMaster,swapMaster,
-                             view,greedyView)
+import XMonad.StackSet as W (focusDown, sink,shift,
+                             greedyView)
 import XMonad.Util.EZConfig
 import XMonad.Util.Run(spawnPipe)
 
-import System.Exit (exitWith, ExitCode(..) )
+import XMonad.Hooks.DynamicLog
 import System.IO
 
+myNormalBorderColor :: String
+myNormalBorderColor  = "#111"
+myFocusedBorderColor :: String
+myFocusedBorderColor = "cadetblue3"
 
-main :: IO ()
-main= do xmproc <- spawnPipe xmobarCmd
-         xmonad defaultConfig {
-                  modMask = myModMask,
-                  -- smartborders removes borders when logical (e.g. fullscreen)
-                  layoutHook =  avoidStruts $ smartBorders
-                                myLayout,
-                  keys = myAltKeymap,
-                  focusedBorderColor = "#f78a00",
-                  terminal = myTerminal,
-                  mouseBindings      = myMouseBindings,
-                  -- startupHook = setWMName "LG3D",
-                  XMonad.workspaces = ws,
-                  manageHook = myManageHook <+> manageDocks <+>
-                               manageHook defaultConfig,
-                  logHook = dynamicLogWithPP $ sjanssenPP
-                       { ppOutput = hPutStrLn xmproc,
-                         ppTitle = xmobarColor "yellow" "" . shorten 100
-                  },
-                  focusFollowsMouse = True
 
-}
-
+oxyXPConfig :: XPConfig
+oxyXPConfig = defaultXPConfig { font              = "xft:Bitstream Vera Sans:pixelsize=14"
+                              , bgColor           = "Aquamarine3"
+                              , fgColor           = "black"
+                              , fgHLight          = "black"
+                              , bgHLight          = "darkslategray4"
+                              , borderColor       = "black"
+                              , promptBorderWidth = 1
+                              , position          = Bottom
+                              , height            = 24
+                              , defaultText       = []
+                              }
 -- ^ Workspace names
 
-ws :: [WorkspaceId]
-ws = ["1:terms","2:audio","3:web","4:files","5:chat",
-      "6:gimp","7:inkscape","8:blender","9:vbox"]
+myWorkspaces :: [WorkspaceId]
+myWorkspaces = ["1:terms","2:audio","3:web","4:files","5:chat"
+               ,"6:gimp","7:inkscape","8:blender","9:vbox"]
 
 -- ^ Layout order
 
@@ -103,7 +80,7 @@ myLayout = onWorkspace "5:chat" pidginLayout $ tiled ||| Full ||| Mirror tiled
 
 -- ^ Program/Workspace hooks
 myManageHook :: ManageHook
-myManageHook = (composeAll $ concat $
+myManageHook = composeAll (concat
     [ [resource     =? r            --> doIgnore               |   r   <- myIgnores]
     , [className    =? c            --> viewShift "1:terms"    |   c   <- terms    ]
     , [className    =? c            --> viewShift "2:audio"    |   c   <- audio      ]
@@ -169,11 +146,11 @@ menu = sort ["arandr",
              "evince",
              "quodlibet",
              "thunar",
-             "emacs",
              "vmpk",
              "yoshimi",
              "amsynth",
              "aeolus",
+             "qsynth",
              "startBristol -mini -quality 8 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
              "startBristol -odyssey -quality 8 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
              "startBristol -arp2600 -quality 6 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
@@ -204,15 +181,6 @@ menu = sort ["arandr",
              "virtualbox",
              "transmission-gtk"]
 
-
-myXPConfig :: XPConfig
-myXPConfig = defaultXPConfig
-           { font = myFont,
-             bgColor = backgroundColor,
-             fgColor = textColor,
-             borderColor = lightBackgroundColor
-}
-
 myFont :: String
 myFont = "xft:Bitstream Vera Sans:size=12"
 
@@ -226,102 +194,64 @@ backgroundColor = "#304520"
 lightBackgroundColor :: String
 lightBackgroundColor  = "#456030"
 
+oxyPP :: Handle -> PP
+oxyPP h = defaultPP  { ppCurrent = wrap "<fc=black,aquamarine3> " " </fc>" 
+                     , ppSep     = ""
+                     , ppWsSep = ""
+                     , ppVisible = wrap "<fc=black,DarkSlateGray4> " " </fc>" 
+                     , ppLayout = \x -> "<fc=aquamarine2,black>:: " ++ 
+                                        case x of
+                                          "Mirror ResizableTall"   -> "MTiled"
+                                          "ResizableTall"          -> "Tiled"
+                                          "Tabbed Bottom Simplest" -> "Tabbed"
+                                          "Tabbed Simplest"        -> "Tabbed"
+                                          _                        -> x
+                                          ++ "</fc> "
+                     , ppTitle = \x -> case length x of
+                                           0 -> ""
+                                           _ -> "<fc=DarkSlateGray3,black>[" ++ shorten 33 x ++ "]</fc>"
+                     , ppHiddenNoWindows = const ""
+                     , ppHidden = wrap "<fc=#aaa,black> " " </fc>"
+                     , ppOutput = hPutStrLn h
+                     }
+-- ^ Additional keybindings
 
--- ^ Keybindings
-
-myAltKeymap :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
-myAltKeymap conf = mkKeymap conf $
-    [-- close the window
-     ("M-k", kill),
-     -- show an application list, se the function "menu" for changing
+myKeymap :: [(String, X ())]
+myKeymap =
+    [ -- show an application list, se the function "menu" for changing
      -- applications
      ("M-a", spawnSelected defaultGSConfig menu),
-     -- Rotate forward through the available layout algorithms
-     ("M-<Tab>", sendMessage NextLayout),
-     -- Quit xmonad
-     ("M-q M-q", io (exitWith ExitSuccess)),
-     -- Restart xmonad
-     ("M-Q M-Q", recompile True >> restart "xmonad" True),
      ("M-z", withFocused $ windows . W.sink), --unfloat
-     -- Launch the default editor defined in the shell variable
-     -- @$@EDITOR
-     ("M-e", raiseEditor),
      -- Launch the default browswe defined in the shell variable
      -- @$@BROWSER
      ("M-b", raiseBrowser),
-     -- launch thunderbird
-     ("M-m", raiseMaybe (spawn "thunderbird")
-                   (className =? "Firefox")),
-     -- window navigation keybindings
-     -- Move focus to the previous window
-     ("M-p", windows W.focusDown),
-     -- Move focus to the next window
-     ("M-n", windows W.focusUp),
-     -- Swap the focused window and the master window
-     ("M-<Space>", windows W.swapMaster),
-     -- Swap the focused window with the next window
-     ("M-u", windows W.swapUp),
-     -- Swap the focused window with the previous window
-     ("M-d", windows W.swapDown),
-     ("M-<Return>", spawn myTerminal),
      -- take a screenshot of the desktop, requires "scrot"
      ("<Print>", spawn "scrot"),
      -- lock the screen
      ("M-l", spawn "xscreensaver-command -lock"),
      -- show the shell prompt
-     ("M-<F1>", shellPrompt defaultXPConfig),
+     ("M-<F1>", shellPrompt oxyXPConfig),
      -- show ssh prompt
-     ("M-<F2>", sshPrompt defaultXPConfig),
-     -- show man page prompt
-     ("M-<F3>", manPrompt defaultXPConfig),
-     ("M-W", shiftToNext >> nextWS),
-     ("M-v", shiftToPrev >> prevWS)] ++
-    -- see searchList for search options
-    [("M-s " ++ k, promptSearch defaultXPConfig f) |
-     (k,f) <- searchList ] ++
-    [("M-S-s"  ++ k, selectSearch f) | (k,f) <- searchList ] ++
-
-    -- mod-[1..],       Switch to workspace N
-    -- mod-shift-[1..], Move client to workspace N
-    -- mod-ctrl-[1..],  Switch to workspace N on other screen
-    [ (m ++ "M-" ++ [k], f i)                                   -- (0)
-      | (i, k) <- zip (XMonad.workspaces conf) "123456789" -- (0)
-    , (f, m) <- [ (windows . W.view, "")                    -- (0a)
-                    , (windows . W.shift, "S-")
-                    , (\ws -> nextScreen >> (windows . W.view $ ws), "C-")
-                    ]
+     ("M-<F2>", sshPrompt oxyXPConfig),
+      -- show man page prompt
+     ("M-<F3>", manPrompt oxyXPConfig)
     ]
 
--- ^ Mouse bindings (moving and resizing windows)
+main :: IO ()
+main= do xmobarPipe <- spawnPipe xmobarCmd
+         xmonad $ defaultConfig {
+                  modMask = myModMask,
+                  -- smartborders removes borders when logical (e.g. fullscreen)
+                  layoutHook =  avoidStruts $ smartBorders
+                                myLayout,
+                  normalBorderColor = myNormalBorderColor,
+                  focusedBorderColor = myFocusedBorderColor,
+                  terminal = myTerminal,
+                  startupHook = setWMName "LG3D",
+                  XMonad.workspaces = myWorkspaces,
+                  manageHook = myManageHook <+> manageDocks <+>
+                               manageHook defaultConfig,
+                  logHook = dynamicLogWithPP $ oxyPP xmobarPipe,
+                  focusFollowsMouse = True
+                 } `additionalKeysP` myKeymap
 
-myMouseBindings :: XConfig Layout ->
-                   M.Map (KeyMask, Button) (Window -> X ())
-myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
-    -- mod-button1 %! Set the window to floating mode
-    -- and move by dragging
-    [((modMask, button1), (\w -> focus w >> mouseMoveWindow w
-                                          >> windows W.shiftMaster)),
-     -- mod-button2 %! Raise the window to the top of the stack
-
-     ((modMask, button2), (\w -> focus w >> windows W.shiftMaster)),
-
-     -- mod-button3 %! Set the window to floating mode
-     --and resize by dragging
-
-     ((modMask, button3), (\w -> focus w >> mouseResizeWindow w
-                                          >> windows W.shiftMaster))
-     -- you may also bind events to the mouse scroll wheel
-     -- (button4 and button5)
-    ]
-
--- ^ A list of search engines
-
-searchList :: [(String, SearchEngine)]
-searchList = [("d",dictionary),
-              ("h",hackage),
-              ("g", google),
-              ("i",isohunt),
-              ("t",thesaurus),
-              ("m",maps),
-              ("y",youtube),
-              ("w", wikipedia)]

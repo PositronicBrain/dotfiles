@@ -1,17 +1,19 @@
-Config { font = "xft:Bitstream Vera Sans:pixelsize=12:antialias=true",
+Config { font = "xft:Bitstream Vera Sans:pixelsize=14:antialias=true:style=bold",
          bgColor = "black",
-         fgColor = "white",
-         position = Static { xpos = 0 , ypos = 0, width = 1600, height = 21 },
-         commands = [Run MultiCpu ["-t", "CPU: <total0>% <total1>% <total2>% <total3>%","-L","3","-H","50","--normal","green","--high","red"]   10,
-                     Run Memory ["-t","Mem: <usedratio>%","--normal","green","--high","red"] 10,
-                     Run CpuFreq ["-t", "Freq:<cpu0> <cpu1> <cpu2> <cpu3>", "-L","0","-H","2","-l","green","-h","red"] 50,
+         fgColor = "lightskyblue",
+         position = Static { xpos = 0 , ypos = 0, width = 1660, height = 25 },
+         commands = [Run Network "enp3s0" ["-L","0","-H","32","--normal","aquamarine2","--high","chocolate1"] 10,
+                     Run MultiCpu ["-t", "CPU: <total0>% <total1>% <total2>% <total3>%","-L","3","-H","50","--normal","aquamarine2","--high","chocolate1"]   10,
+                     Run Memory ["-t","Mem: <usedratio>%","--normal","aquamarine2","--high","chocolate1"] 10,
+                     Run CpuFreq ["-t", "Freq:<cpu0>", "-L","0","-H","2","-l","aquamarine2","-h","chocolate1"] 50,
                      Run ThermalZone 0 ["-t","CPU: <temp> C"] 30,
                      Run ThermalZone 1 ["-t","Mobo: <temp> C"] 30,
-                     Run Date "%a %b %_d %l:%M" "date" 30,
+                     Run Date "%a %b %_d %Y" "date" 360,
+                     Run Date "%H:%M:%S" "time" 30,
                      Run StdinReader
-                    ]
-
-       , sepChar = "%"
-       , alignSep = "}{"
-       , template = "%StdinReader% }{ %multicpu% | %memory% | %cpufreq% | %thermal0% | %thermal1% | %date%"
+                    ],
+         sepChar = "%",
+         alignSep = "}{",
+         template = "%StdinReader% }{[%enp3s0%][%multicpu%][%memory%][%cpufreq%][%thermal0%][%thermal1%]<fc=DarkSlateGray3>[ %date% ]</fc><fc=aquamarine2>[ %time% ]</fc>"
        }
+                                                                                                                              }
