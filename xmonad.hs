@@ -227,8 +227,6 @@ myKeymap =
      ("M-b", raiseBrowser),
      -- take a screenshot of the desktop, requires "scrot"
      ("<Print>", spawn "scrot"),
-     -- lock the screen
-     ("M-l", spawn "xscreensaver-command -lock"),
      -- show the shell prompt
      ("M-<F1>", shellPrompt oxyXPConfig),
      -- show ssh prompt
