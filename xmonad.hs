@@ -250,6 +250,6 @@ main= do xmobarPipe <- spawnPipe xmobarCmd
                   manageHook = myManageHook <+> manageDocks <+>
                                manageHook defaultConfig,
                   logHook = dynamicLogWithPP $ oxyPP xmobarPipe,
-                  focusFollowsMouse = True
+                  focusFollowsMouse = False
                  } `additionalKeysP` myKeymap
 
