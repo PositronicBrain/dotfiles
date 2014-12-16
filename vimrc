@@ -1,4 +1,5 @@
 set nocompatible
+set nofoldenable    " disable folding
 filetype off
 call neobundle#begin(expand('~/.vim/neobundle/'))
 NeoBundle 'Shougo/vimproc.vim', {
