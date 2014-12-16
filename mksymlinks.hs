@@ -1,6 +1,8 @@
+#!/usr/bin/runhaskell
+
 ----------------------------
--- This script creates symlinks from the home directory to any
--- desired dotfiles in ~/dotfiles.
+-- This script creates symlinks from the home directory to all
+-- configuration files in ~/dotfiles.
 ----------------------------
 
 {-# LANGUAGE LambdaCase #-}
