@@ -72,12 +72,13 @@ ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
 
 # Policy kit authentication agent
 ifExistsDo "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+sleep 1
 
 # automount
 ifExistsDo "/usr/bin/thunar" "thunar --daemon"
 
 # Jack sound server
-jack_control start
+
 #sudo schedtool -R -p 20 `pidof jackdbus`
 jack_control eps realtime true
 jack_control ds alsa
@@ -88,8 +89,9 @@ jack_control dps device hw:0,0
 ifExistsDo "/usr/bin/qjackctl" "qjackctl"
 
 ifExistsDo "/usr/bin/alsa-tray" "alsa-tray"
+
 # tracker
-#ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
+ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
 
 # dropbox
 ifExistsDo "/usr/bin/dropboxd" "dropboxd"
