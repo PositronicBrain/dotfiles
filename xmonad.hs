@@ -208,7 +208,7 @@ oxyPP h = defaultPP  { ppCurrent = wrap "<fc=black,aquamarine3> " " </fc>"
                                           ++ "</fc> "
                      , ppTitle = \x -> case length x of
                                            0 -> ""
-                                           _ -> "<fc=DarkSlateGray3,black>[" ++ shorten 33 x ++ "]</fc>"
+                                           _ -> "<fc=DarkSlateGray3,black>[" ++ shorten 60 x ++ "]</fc>"
                      , ppHiddenNoWindows = const ""
                      , ppHidden = wrap "<fc=#aaa,black> " " </fc>"
                      , ppOutput = hPutStrLn h
