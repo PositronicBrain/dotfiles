@@ -101,10 +101,10 @@ myManageHook = composeAll (concat
         -- classnames
         terms    = ["Evilvte"]
         files    = ["Thunar","Evince","Gnome-documents","Jabref"]
-        cfloats   = ["MPlayer","XFontSel","Mplayer2","mplayer2",
-                    "Default - Wine desktop","Wine"]
+        cfloats   = ["mpv","XFontSel","mpv","mpv",
+                    "Default - Wine desktop","Wine","openttd"]
         floats   = ["Mini (bristol)","Bristol gui","BasicWin","Mini",
-                    "Alsa-tray","Qsynth","Vmpk","Yoshimi","Qjackctl","Hydrogen","Amsynth","Aeolus"]
+                    "Qsynth","Vmpk","Yoshimi","Qjackctl","Hydrogen","Amsynth","Aeolus"]
         web      = ["Firefox","Chromium"]
         chat     = ["Pidgin","Buddy List"]
         gimp     = ["Gimp"]
