@@ -54,8 +54,7 @@ oxyXPConfig = defaultXPConfig { font              = "xft:Bitstream Vera Sans:pix
 -- ^ Workspace names
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["1:terms","2:audio","3:web","4:files","5:chat"
-               ,"6:gimp","7:inkscape","8:blender","9:vbox"]
+myWorkspaces = map show [1..9]
 
 -- ^ Layout order
 
@@ -82,15 +81,15 @@ myLayout = onWorkspace "5:chat" pidginLayout $ tiled ||| Full ||| Mirror tiled
 myManageHook :: ManageHook
 myManageHook = composeAll (concat
     [ [resource     =? r            --> doIgnore               |   r   <- myIgnores]
-    , [className    =? c            --> viewShift "1:terms"    |   c   <- terms    ]
-    , [className    =? c            --> viewShift "2:audio"    |   c   <- audio      ]
-    , [className    =? c            --> viewShift "3:web"      |   c   <- web      ]
-    , [className    =? c            --> viewShift "4:files"    |   c   <- files    ]
-    , [className    =? c            --> viewShift "5:chat"     |   c   <- chat     ]
-    , [className    =? c            --> viewShift "6:gimp"     |   c   <- gimp     ]
-    , [className    =? c            --> viewShift "7:inkscape" |   c   <- inkscape ]
-    , [className    =? c            --> viewShift "8:blender"  |   c   <- blender  ]
-    , [className    =? c            --> viewShift "9:vbox"     |   c   <- vbox     ]
+    , [className    =? c            --> viewShift "1"    |   c   <- terms    ]
+    , [className    =? c            --> viewShift "2"    |   c   <- audio      ]
+    , [className    =? c            --> viewShift "3"      |   c   <- web      ]
+    , [className    =? c            --> viewShift "4"    |   c   <- files    ]
+    , [className    =? c            --> viewShift "5"     |   c   <- chat     ]
+    , [className    =? c            --> viewShift "6"     |   c   <- gimp     ]
+    , [className    =? c            --> viewShift "7" |   c   <- inkscape ]
+    , [className    =? c            --> viewShift "8"  |   c   <- blender  ]
+    , [className    =? c            --> viewShift "9"     |   c   <- vbox     ]
     , [className    =? c            --> doCenterFloat          |   c   <- cfloats  ]
     , [className    =? c            --> doFloat                |   c   <- floats   ]
     , [isFullscreen                 --> myDoFullFloat                              ]
