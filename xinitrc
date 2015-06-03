@@ -1,5 +1,5 @@
 ##### GLOBAL CONFIGURATION VARIABLES #####
-export PATH=$PATH:/sbin:/usr/sbin:/home/federico/.cabal/bin
+export PATH=~/.cabal/bin:$PATH:/sbin:/usr/sbin:
 export SDL_AUDIODRIVER="alsa"
 export QT_STYLE_OVERRIDE="gtk"
 export SHELL="/bin/bash"
@@ -88,13 +88,13 @@ jack_control dps device hw:0,0
 #jack_control dps period 64
 ifExistsDo "/usr/bin/qjackctl" "qjackctl"
 
-ifExistsDo "/usr/bin/alsa-tray" "alsa-tray"
+ifExistsDo "/usr/bin/volti" "volti"
 
 # tracker
 ifExistsDo "/usr/bin/tracker-control" "tracker-control -s"
 
 # dropbox
-ifExistsDo "/usr/bin/dropboxd" "dropboxd"
+ifExistsDo "/usr/bin/dropbox" "dropbox"
 
 # audio player
 ifExistsDo "/usr/bin/quodlibet" "quodlibet"
