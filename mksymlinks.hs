@@ -34,7 +34,7 @@ files = [Home "bashrc" ".bashrc",
          NewDir "cabal" ".cabal" "config",
          NewDir "xmonad.hs" ".xmonad" "xmonad.hs",
          NewDir "redshift.conf" ".config" "redshift.conf",
-         NewDir "mplayer" ".mplayer" "config",
+         NewDir "mpv" ".mpv" "config",
          NewDir "cabal" ".cabal" "config"
        ]
 
