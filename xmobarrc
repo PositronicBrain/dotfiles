@@ -17,7 +17,7 @@ Config { font = "xft:Bitstream Vera Sans:pixelsize=14:antialias=true:style=bold"
                      Run CoreTemp ["-t", "Cores: <core0> <core1> <core2> <core3>C"
                      , "-L", "40", "-H", "60",  "-n", "aquamarine2", "-h", "chocolate1"] 50,
                      Run Date "%a %b %_d %Y" "date" 360,
-                     Run Date "%H:%M:%S" "time" 30,
+                     Run Date "%H:%M" "time" 60,
                      Run StdinReader
                     ],
          sepChar = "%",
