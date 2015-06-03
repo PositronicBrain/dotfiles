@@ -1,0 +1,39 @@
+ao=jack #audio out
+#mixer-channel="Master"
+audio-samplerate=48000
+af=scaletempo
+audio-channels=2
+vo=opengl-hq #video output driver
+hwdec=vaapi #video decoder driver
+sid=0 #subtitle set
+
+#Display
+
+monitoraspect=16:9 # keeps 4:3 content from stretching
+
+#always keep mpv on top
+ontop=yes
+
+#turns off xscreen saver...maybe
+stop-screensaver=yes
+
+#Fix A/V sync problems on files with bad MP3 VBR audio
+#mc="1"
+#autosync="10"
+#delay="0.5"
+
+# Text-based subtitles
+#=====================
+
+# Find subtitle files. (2: load all subs in the directory)
+sub-auto=fuzzy
+
+# Set font.
+osd-font=DejaVuSans
+
+# Set subtitle position. (100: as low as possible)
+sub-pos=95
+
+
+sub-scale=2
+
