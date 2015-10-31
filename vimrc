@@ -18,13 +18,13 @@ NeoBundle 'Shougo/vimproc.vim', {
 " cd .vim/neobundle/YouCompleteMe
 " bash install.sh
 NeoBundle 'Valloric/YouCompleteMe', {
-     \ 'build'      : {
-        \ 'mac'     : './install.py',
-        \ 'unix'    : './install.py',
-        \ 'windows' : 'install.py',
-        \ 'cygwin'  : './install.py'
-        \ }
-     \ }
+            \ 'build'      : {
+            \ 'mac'     : './install.py',
+            \ 'unix'    : './install.py',
+            \ 'windows' : 'install.py',
+            \ 'cygwin'  : './install.py'
+            \ }
+            \ }
 " Haskell plugins
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'eagletmt/neco-ghc'            " requires neocomplete.vim
@@ -43,8 +43,8 @@ NeoBundle 'sickill/vim-monokai'
 NeoBundle 'rainux/vim-desert-warm-256'
 NeoBundle 'w0ng/vim-hybrid'
 " Javascript plugins
-" NeoBundle 'jelera/vim-javascript-syntax' , {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'jelera/vim-javascript-syntax' , {'autoload':{'filetypes':['javascript']}}
+" NeoBundle 'pangloss/vim-javascript'
 " cd .vim/neobundle/tern_for_vim
 " npm install
 NeoBundle 'ternjs/tern_for_vim' " improves on youcompleteme for javascript
@@ -78,7 +78,7 @@ set nowrap " no visual wrapping
 set formatoptions=cq
 set scrolloff=4
 set hidden
-set autoindent smartindent expandtab tabstop=4 softtabstop=4 shiftwidth=4
+set autoindent expandtab tabstop=4 softtabstop=4 shiftwidth=4
 " Highlight columns longer than 80
 augroup vimrc_autocmds
 autocmd BufEnter * highlight OverLength ctermbg=1  guibg=#592929
@@ -104,9 +104,9 @@ let g:tex_flavor='latex'
 set encoding=utf-8
 setglobal fileencoding=utf-8
 " Disable folding
-:let Tex_FoldedSections=""
-:let Tex_FoldedEnvironments=""
-:let Tex_FoldedMisc=""
+let Tex_FoldedSections=""
+let Tex_FoldedEnvironments=""
+let Tex_FoldedMisc=""
 " neocomplete
 let g:acp_enableAtStartup = 1 "Enable automatic popup
 let g:neocomplete#enable_at_startup = 1
