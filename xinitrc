@@ -68,7 +68,8 @@ ifExistsDo "/usr/bin/trayer" \
 ifExistsDo "/usr/bin/unclutter" "unclutter -root -idle 10 -jitter 10"
 
 # keyring manager
-ifExistsDo "/usr/bin/gnome-keyring-daemon" "gnome-keyring-daemon  --start"
+eval $(/usr/bin/gnome-keyring-daemon)
+export SSH_AUTH_SOCK
 
 # Policy kit authentication agent
 ifExistsDo "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
