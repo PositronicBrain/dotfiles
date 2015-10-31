@@ -1,7 +1,9 @@
 set nocompatible
-set nofoldenable    " disable folding
+" set nofoldenable    " disable folding
 filetype off
 
+" Avoid timeoutes when building modules
+let g:neobundle#install_process_timeout = 1500
 call neobundle#begin(expand('~/.vim/neobundle/'))
 NeoBundle 'Shougo/vimproc.vim', {
             \ 'build' : {
@@ -12,11 +14,24 @@ NeoBundle 'Shougo/vimproc.vim', {
             \     'unix' : 'gmake',
             \    },
             \ }
+" Automatic completion for different languages, including javascript
+" cd .vim/neobundle/YouCompleteMe
+" bash install.sh
+NeoBundle 'Valloric/YouCompleteMe', {
+     \ 'build'      : {
+        \ 'mac'     : './install.py',
+        \ 'unix'    : './install.py',
+        \ 'windows' : 'install.py',
+        \ 'cygwin'  : './install.py'
+        \ }
+     \ }
+" Haskell plugins
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'eagletmt/neco-ghc'            " requires neocomplete.vim
 NeoBundle 'eagletmt/ghcmod-vim'          " requires vimproc.vim
 NeoBundle 'dag/vim2hs'
 NeoBundle 'travitch/hasksyn'
+" General editing plugins
 NeoBundle 'dhruvasagar/vim-table-mode'
 NeoBundle 'bronson/vim-trailing-whitespace' " :FixWhiteSpace
 NeoBundle 'scrooloose/nerdcommenter'
@@ -26,6 +41,17 @@ NeoBundle 'vim-scripts/Solarized'
 NeoBundle 'morhetz/gruvbox'
 NeoBundle 'sickill/vim-monokai'
 NeoBundle 'rainux/vim-desert-warm-256'
+NeoBundle 'w0ng/vim-hybrid'
+" Javascript plugins
+" NeoBundle 'jelera/vim-javascript-syntax' , {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'pangloss/vim-javascript'
+" cd .vim/neobundle/tern_for_vim
+" npm install
+NeoBundle 'ternjs/tern_for_vim' " improves on youcompleteme for javascript
+" html plugins
+NeoBundle 'mattn/emmet-vim/'
+" Linting
+NeoBundle 'scrooloose/syntastic'
 call neobundle#end()
 
 filetype plugin indent on
@@ -42,7 +68,6 @@ set wildmode=list:longest,full
 set omnifunc=syntaxcomplete#Complete
 set hidden
 set nrformats-=octal
-set autoindent smartindent expandtab tabstop=4 softtabstop=4 shiftwidth=4
 set listchars=tab:‣\ ,trail:␣
 set list
 set nobackup
@@ -53,6 +78,7 @@ set nowrap " no visual wrapping
 set formatoptions=cq
 set scrolloff=4
 set hidden
+set autoindent smartindent expandtab tabstop=4 softtabstop=4 shiftwidth=4
 " Highlight columns longer than 80
 augroup vimrc_autocmds
 autocmd BufEnter * highlight OverLength ctermbg=1  guibg=#592929
@@ -65,7 +91,7 @@ set statusline=%<%F\ %h%m%r%{fugitive#statusline()}%=%-14.(%l/%L,%c%V%)\ %y
 set noswapfile
 set equalalways eadirection=both
 
-" Sane behaviour when pasting from other apps
+" Sane behaviour when pasting from X clipboard
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
@@ -74,7 +100,7 @@ autocmd BufRead,BufNewFile *.txt,*.tex set fo=cqt tw=72 wm=0
 
 let g:tex_flavor='latex'
 " Use unicode for math symbols
-set conceallevel=0
+" set conceallevel=0
 set encoding=utf-8
 setglobal fileencoding=utf-8
 " Disable folding
@@ -98,3 +124,17 @@ let g:table_mode_fillchar = '-'
 set t_Co=256
 set background=dark
 colorscheme gruvbox
+
+set guioptions-=M  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guifont=DejaVu\ Sans\ Mono\ 15
+" ntrw config
+let g:netrw_browse_split = 4 "  vertically splitting the window first  
+let g:netrw_altv = 1
+let g:netrw_liststyle=3
+let g:netrw_winsize = 25
+
+" Youcomplete me config, no new winds
+let g:ycm_add_preview_to_completeopt=0
+let g:ycm_confirm_extra_conf=0
+set completeopt-=preview
