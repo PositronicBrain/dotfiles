@@ -68,6 +68,8 @@ ifExistsDo "/usr/bin/trayer" \
 ifExistsDo "/usr/bin/unclutter" "unclutter -root -idle 10 -jitter 10"
 
 # keyring manager
+# Remember you can flush passphrases
+# gnome-keyring-daemon -r -d
 eval $(/usr/bin/gnome-keyring-daemon)
 export SSH_AUTH_SOCK
 
