@@ -4,7 +4,7 @@ audio-samplerate=48000
 af=scaletempo
 audio-channels=2
 vo=opengl-hq #video output driver
-hwdec=vaapi #video decoder driver
+hwdec=vdpau #video decoder driver
 sid=0 #subtitle set
 
 #Display
