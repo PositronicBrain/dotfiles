@@ -44,7 +44,7 @@ NeoBundle 'rainux/vim-desert-warm-256'
 NeoBundle 'w0ng/vim-hybrid'
 " Javascript plugins
 NeoBundle 'jelera/vim-javascript-syntax' , {'autoload':{'filetypes':['javascript']}}
-" NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'pangloss/vim-javascript'
 " cd .vim/neobundle/tern_for_vim
 " npm install
 NeoBundle 'ternjs/tern_for_vim' " improves on youcompleteme for javascript
@@ -52,6 +52,8 @@ NeoBundle 'ternjs/tern_for_vim' " improves on youcompleteme for javascript
 NeoBundle 'mattn/emmet-vim/'
 " Linting
 NeoBundle 'scrooloose/syntastic'
+"Auto matching parentheses
+NeoBundle 'Raimondi/delimitMate'
 call neobundle#end()
 
 filetype plugin indent on
@@ -65,6 +67,9 @@ set modeline
 set number
 set wildmenu
 set wildmode=list:longest,full
+set wildignore=*.o,*.obj,*~         "stuff to ignore when tab completing
+set wildignore+=*DS_Store*
+set wildignore+=*.png,*.jpg,*.gif,*.pdf,*.psd
 set omnifunc=syntaxcomplete#Complete
 set hidden
 set nrformats-=octal
@@ -138,3 +143,5 @@ let g:netrw_winsize = 25
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_confirm_extra_conf=0
 set completeopt-=preview
+" js linter: eslint
+let g:syntastic_javascript_checkers = ['eslint']
