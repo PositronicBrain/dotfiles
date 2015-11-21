@@ -54,6 +54,8 @@ NeoBundle 'mattn/emmet-vim/'
 NeoBundle 'scrooloose/syntastic'
 "Auto matching parentheses
 NeoBundle 'Raimondi/delimitMate'
+" Better status line
+NeoBundle 'bling/vim-airline'
 call neobundle#end()
 
 filetype plugin indent on
@@ -75,7 +77,6 @@ set hidden
 set nrformats-=octal
 set listchars=tab:‣\ ,trail:␣
 set list
-set nobackup
 " The following two options turn off physical line wrappings
 set textwidth=0
 set wrapmargin=0
@@ -92,7 +93,7 @@ augroup END
 
 set autowrite
 set showmatch
-set statusline=%<%F\ %h%m%r%{fugitive#statusline()}%=%-14.(%l/%L,%c%V%)\ %y
+"set statusline=%<%F\ %h%m%r%{fugitive#statusline()}%=%-14.(%l/%L,%c%V%)\ %y
 set noswapfile
 set equalalways eadirection=both
 
@@ -145,3 +146,15 @@ let g:ycm_confirm_extra_conf=0
 set completeopt-=preview
 " js linter: eslint
 let g:syntastic_javascript_checkers = ['eslint']
+" Turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
+" Sane backup settings
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+
+" Useful to speed up macros
+set lazyredraw 
