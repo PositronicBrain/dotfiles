@@ -157,4 +157,4 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
 " Useful to speed up macros
-set lazyredraw 
+"set lazyredraw 
