@@ -67,15 +67,16 @@ ifExistsDo "/usr/bin/trayer" \
 # unclutter removes the mouse after a timeout
 ifExistsDo "/usr/bin/unclutter" "unclutter -root -idle 10 -jitter 10"
 
+
+# Policy kit authentication agent
+ifExistsDo "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+sleep 1
+
 # keyring manager
 # Remember you can flush passphrases
 # gnome-keyring-daemon -r -d
 eval $(/usr/bin/gnome-keyring-daemon)
 export SSH_AUTH_SOCK
-
-# Policy kit authentication agent
-ifExistsDo "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-sleep 1
 
 # automount
 ifExistsDo "/usr/bin/thunar" "thunar --daemon"
@@ -83,6 +84,7 @@ ifExistsDo "/usr/bin/thunar" "thunar --daemon"
 # Jack sound server
 
 #sudo schedtool -R -p 20 `pidof jackdbus`
+jack_control start
 jack_control eps realtime true
 jack_control ds alsa
 jack_control dps device hw:0,0
