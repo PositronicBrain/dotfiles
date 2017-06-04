@@ -1,8 +1,14 @@
-Config { font = "xft:Bitstream Vera Sans:pixelsize=14:antialias=true:style=bold",
-         bgColor = "black",
-         fgColor = "lightskyblue",
-         position = Static { xpos = 0 , ypos = 0, width = 1660, height = 25 },
-         commands = [Run Network "enp3s0" ["-L","0","-H","32"
+Config { font = "xft:Bitstream Vera Sans:pixelsize=14:antialias=true:style=bold"
+       , bgColor = "black"
+       , fgColor = "lightskyblue"
+       , position = Static { xpos = 0 , ypos = 0, width = 1660, height = 25 }
+       , lowerOnStart =     False    -- send to bottom of window stack on start
+       , hideOnStart =      False   -- start with window unmapped (hidden)
+       , allDesktops =      True    -- show on all desktops
+       , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
+       , pickBroadest =     False   -- choose widest display (multi-monitor)
+       , persistent =       True    -- enable/disable hiding (True = disabled)
+       , commands = [Run Network "enp3s0" ["-L","0","-H","32"
                     ,"--normal","aquamarine2","--high","chocolate1"] 10,
                      Run MultiCpu ["-t", "CPU: <total0>% <total1>% <total2>% <total3>%"
                     ,"-L","3","-H","50","--normal","aquamarine2","--high","chocolate1"]   10,
@@ -19,9 +25,9 @@ Config { font = "xft:Bitstream Vera Sans:pixelsize=14:antialias=true:style=bold"
                      Run Date "%a %b %_d %Y" "date" 360,
                      Run Date "%H:%M" "time" 60,
                      Run StdinReader
-                    ],
-         sepChar = "%",
-         alignSep = "}{",
-         template = "%StdinReader% }{[%enp3s0%][%multicpu%][%memory%][%coretemp%][%thermal0% %thermal1% %thermal2%]<fc=DarkSlateGray3>[ %date% ]</fc><fc=aquamarine2>[ %time% ]</fc>"
+                    ]
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = "%StdinReader% }{[%enp3s0%][%multicpu%][%memory%][%coretemp%][%thermal0% %thermal1% %thermal2%]<fc=DarkSlateGray3>[ %date% ]</fc><fc=aquamarine2>[ %time% ]</fc>"
        }
                                                                                                                               }
