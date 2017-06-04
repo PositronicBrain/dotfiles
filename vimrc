@@ -4,12 +4,13 @@ filetype off
 
 
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-rooter'
+" Plug 'airblade/vim-rooter'
 " Better startup screen
 Plug 'mhinz/vim-startify'
 Plug 'ctrlpvim/ctrlp.vim'
 " Improvements to the vim file explorer
 Plug 'tpope/vim-vinegar'
+Plug 'jeetsukumaran/vim-buffergator'
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Git integration
@@ -20,6 +21,8 @@ Plug 'tpope/vim-fugitive'
 " Programming languages autocompletion
 Plug 'Shougo/neocomplete.vim'
 
+" Color hex codes
+Plug 'chrisbra/Colorizer'
 " General editing plugins
 Plug 'dhruvasagar/vim-table-mode'
 " :FixWhiteSpace
@@ -39,7 +42,7 @@ Plug 'chriskempson/base16-vim'
 " Javascript plugins
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-
+Plug 'mxw/vim-jsx'
  " improves on youcompleteme for javascript
 Plug 'ternjs/tern_for_vim' , { 'do': 'npm install' }
 " html plugins
@@ -47,9 +50,10 @@ Plug 'mattn/emmet-vim/'
 " Linting
 Plug 'scrooloose/syntastic'
 " Prefer local eslint version
-Plug 'pmsorhaindo/syntastic-local-eslint.vim'
+Plug 'mtscout6/syntastic-local-eslint.vim'
 "Auto matching parentheses
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
+" Pug 'jiangmiao/auto-pairs'
 " Better status line
 " Plug 'bling/vim-airline'
 
@@ -58,6 +62,12 @@ Plug 'mileszs/ack.vim'
 " Plug 'itchyny/lightline.vim'
 
 Plug 'tpope/vim-eunuch'
+" Solidity
+Plug 'tomlion/vim-solidity'
+
+"Purescript
+Plug 'frigoeu/psc-ide-vim'
+Plug 'raichoo/purescript-vim'
 call plug#end()
 " show buffers in line
 " let g:airline#extensions#tabline#enabled = 1
@@ -97,16 +107,16 @@ set list
 " The following two options turn off physical line wrappings
 set textwidth=0
 set wrapmargin=0
-" set guifont=DejaVu\ Sans\ Mono\ 15
-set guifont=Monaco:h17
+set guifont=DejaVu\ Sans\ Mono\ 15
+" set guifont=Monaco:h17
 set nowrap " no visual wrapping
 set formatoptions=cq
 set scrolloff=4
 set autoindent
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 " Highlight columns longer than 80
 augroup vimrc_autocmds
 autocmd BufEnter * highlight OverLength ctermbg=1  guibg=#592929
@@ -151,14 +161,15 @@ set t_Co=256
 set background=dark
 let base16colorspace=256
 
-colorscheme base16-tomorrow
+colorscheme base16-tomorrow-night
 " display ambiguous unicode characters on two columns
 set ambiwidth=double
 set guioptions-=M  "remove menu bar
 set guioptions-=T  "remove toolbar
 
 " Syntastic
-let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
@@ -190,3 +201,23 @@ set writebackup
 
 " icons in airline
 " let g:airline_powerline_fonts = 1
+
+let g:buffergator_viewport_split_policy = 'T'
+
+let g:buffergator_sort_regime = 'filepath'
+let g:buffergator_display_regime = 'filepath'
+
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|png|jpg|jpeg|gif)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let mapleader = "\<Space>"
+
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+map <Leader>f :CtrlP<cr>
+
+
+let g:colorizer_auto_filetype='css,html,js'
+
