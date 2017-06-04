@@ -17,6 +17,7 @@ import XMonad.Actions.WindowGo (raiseBrowser)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers(isFullscreen,doFullFloat,doCenterFloat,doFullFloat)
 import XMonad.Hooks.SetWMName (setWMName)
+import XMonad.Hooks.EwmhDesktops  (fullscreenEventHook)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.IM
 import XMonad.Layout.Grid
@@ -126,10 +127,10 @@ myManageHook = composeAll (concat
 xmobarCmd :: String
 xmobarCmd = "/usr/bin/xmobar  ~/.xmobarrc"
 
--- ^ Which terminal to use (evilvte)
+-- ^ Which terminal to use (termite)
 
 myTerminal :: String
-myTerminal = "evilvte"
+myTerminal = "termite"
 
 -- ^ Key for combinations (Win)
 
@@ -234,21 +235,26 @@ myKeymap =
      ("M-<F3>", manPrompt oxyXPConfig)
     ]
 
+trayer = "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype pixel --width 260 --transparent true --tint 0x000000 --alpha 0 --height 25"
+
 main :: IO ()
 main= do xmobarPipe <- spawnPipe xmobarCmd
-         xmonad $ defaultConfig {
+         spawn trayer
+         xmonad $ docks $ defaultConfig {
                   modMask = myModMask,
                   -- smartborders removes borders when logical (e.g. fullscreen)
                   layoutHook =  avoidStruts $ smartBorders
                                 myLayout,
+                  
+     handleEventHook    = fullscreenEventHook, -- fix chrome fullscreen
                   normalBorderColor = myNormalBorderColor,
                   focusedBorderColor = myFocusedBorderColor,
                   terminal = myTerminal,
                   startupHook = setWMName "LG3D",
                   XMonad.workspaces = myWorkspaces,
-                  manageHook = myManageHook <+> manageDocks <+>
-                               manageHook defaultConfig,
+                --  manageHook = manageDocks <+> manageHook defaultConfig,
+                  manageHook = myManageHook <+> manageHook defaultConfig,
                   logHook = dynamicLogWithPP $ oxyPP xmobarPipe,
                   focusFollowsMouse = False
-                 } `additionalKeysP` myKeymap
+                 } `additionalKeysP`    myKeymap
 
