@@ -1,0 +1,22 @@
+[options]
+font = DejaVu Sans Mono 16
+clickable_url = true
+scrollback_lines = 10000
+resize_grip = false
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+visible_bell = true
+mouse_autohide = true
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+cursor_blink = off
+[colors]
+foreground = #FFFFFF
+background  = rgba(0, 0, 0, 0.8)
+cursor = #FF0000
+[hints]
+foreground = #55FFFF
+
+
