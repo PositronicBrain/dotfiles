@@ -4,31 +4,47 @@ filetype off
 
 
 call plug#begin('~/.vim/plugged')
-" Plug 'airblade/vim-rooter'
+" Smooth scrolling
+Plug 'yuttie/comfortable-motion.vim'
+
+" Colorscheme and statusline
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'bluz71/vim-moonfly-statusline'
+
+" Go to root of the project when opening a file
+Plug 'airblade/vim-rooter'
+
 " Better startup screen
 Plug 'mhinz/vim-startify'
-Plug 'ctrlpvim/ctrlp.vim'
+
 " Improvements to the vim file explorer
-Plug 'tpope/vim-vinegar'
 Plug 'jeetsukumaran/vim-buffergator'
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Git integration
 Plug 'tpope/vim-fugitive'
 
+" Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+" Programming languages autocompletion
+" Plug 'Shougo/neocomplete.vim'
+" Plug 'maralla/completor.vim'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
-" Programming languages autocompletion
-Plug 'Shougo/neocomplete.vim'
+Plug 'lifepillar/vim-mucomplete'
+
 
 " Color hex codes
 Plug 'chrisbra/Colorizer'
-" General editing plugins
+"
+" Better table management
 Plug 'dhruvasagar/vim-table-mode'
+
 " :FixWhiteSpace
 Plug 'bronson/vim-trailing-whitespace'
+
+" Comment portion of text
 Plug 'scrooloose/nerdcommenter'
-" Color themes
+
+" Various Color themes
 Plug 'nanotech/jellybeans.vim'
 Plug 'vim-scripts/Solarized'
 Plug 'morhetz/gruvbox'
@@ -37,47 +53,43 @@ Plug 'rainux/vim-desert-warm-256'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/base16-vim'
 
-
-
 " Javascript plugins
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx'
  " improves on youcompleteme for javascript
-Plug 'ternjs/tern_for_vim' , { 'do': 'npm install' }
+" Plug 'ternjs/tern_for_vim' , { 'do': 'npm install' }
 " html plugins
 Plug 'mattn/emmet-vim/'
 " Linting
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+" Plug 'scrooloose/syntastic'
 " Prefer local eslint version
-Plug 'mtscout6/syntastic-local-eslint.vim'
-"Auto matching parentheses
-" Plug 'Raimondi/delimitMate'
-" Pug 'jiangmiao/auto-pairs'
-" Better status line
-" Plug 'bling/vim-airline'
+" Plug 'mtscout6/syntastic-local-eslint.vim'
 
+" Search into files with :Ack
 Plug 'mileszs/ack.vim'
 " Plug 'ryanoasis/vim-devicons'
-" Plug 'itchyny/lightline.vim'
+
+" :Delete :Move :Rename :Chmod: Mkdir :Find :Locate: :Wall :SudoWrite :SudoEdit
 
 Plug 'tpope/vim-eunuch'
-" Solidity
+
+" Solidity development
 Plug 'tomlion/vim-solidity'
 
 "Purescript
 Plug 'frigoeu/psc-ide-vim'
 Plug 'raichoo/purescript-vim'
-call plug#end()
-" show buffers in line
-" let g:airline#extensions#tabline#enabled = 1
 
-set statusline=                                     " Override default
-set statusline+=%1*%{fugitive#statusline()[4:-2]}%* " Show fugitive git info
-set statusline+=%2*\ %f\ %m\ %r%*                   " Show filename/path
-set statusline+=%3*%=%*                             " Set right-side status info after this line
-set statusline+=%4*%l/%L:%v%*                       " Set <line number>/<total lines>:<column>
-set statusline+=%5*\ %*                             " Set ending space
+" Graphql syntax
+Plug 'jparise/vim-graphql'
+
+" Rust
+Plug 'rust-lang/rust.vim'
+
+call plug#end()
+
 let mapleader = ","
 set visualbell           " don't beep
 set noerrorbells         " don't beep
@@ -107,8 +119,8 @@ set list
 " The following two options turn off physical line wrappings
 set textwidth=0
 set wrapmargin=0
-set guifont=DejaVu\ Sans\ Mono\ 15
-" set guifont=Monaco:h17
+" set guifont=DejaVu\ Sans\ Mono\ 15
+set guifont=Monaco:h18
 set nowrap " no visual wrapping
 set formatoptions=cq
 set scrolloff=4
@@ -144,10 +156,7 @@ setglobal fileencoding=utf-8
 let Tex_FoldedSections=""
 let Tex_FoldedEnvironments=""
 let Tex_FoldedMisc=""
-" neocomplete
-" Disable AutoComplPop.
-" let g:acp_enableAtStartup = 1 "Enable automatic popup
-let g:neocomplete#enable_at_startup = 1
+"
 " Uncomment the following to enable neocomplete for every supported filetype
 set omnifunc=syntaxcomplete#Complete
 
@@ -161,30 +170,15 @@ set t_Co=256
 set background=dark
 let base16colorspace=256
 
-colorscheme base16-tomorrow-night
+" colorscheme desert-warm-256
+colorscheme moonfly
 " display ambiguous unicode characters on two columns
 set ambiwidth=double
+
+" Remove toolbars
 set guioptions-=M  "remove menu bar
 set guioptions-=T  "remove toolbar
 
-" Syntastic
-"let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-
-let g:syntastic_error_symbol = '!'
-" let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '?'
-" let g:syntastic_style_warning_symbol = '💩'
-
-" highlight link SyntasticErrorSign SignColumn
-" highlight link SyntasticWarningSign SignColumn
-" highlight link SyntasticStyleErrorSign SignColumn
-" highlight link SyntasticStyleWarningSign SignColumn
 " Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
@@ -195,29 +189,44 @@ set backupskip=/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
-
 " Useful to speed up macros
-"set lazyredraw 
+"set lazyredraw
 
-" icons in airline
-" let g:airline_powerline_fonts = 1
-
+" Split horizontally and sort by filepath
 let g:buffergator_viewport_split_policy = 'T'
-
 let g:buffergator_sort_regime = 'filepath'
 let g:buffergator_display_regime = 'filepath'
 
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|png|jpg|jpeg|gif)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-let mapleader = "\<Space>"
-
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-map <Leader>f :CtrlP<cr>
-
-
+" Colorize hex codes in the following files
 let g:colorizer_auto_filetype='css,html,js'
 
+let g:ale_linters = { 'javascript': ['standard'] }
+let g:ale_fixers = { 'javascript': ['standard']  }
+
+
+" mucomplete setup
+set completeopt+=menuone
+set completeopt+=noselect
+inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+" No other configuration is needed. Just start pressing <tab> or <s-tab> to complete a word. If you want to enable automatic completion at startup, put
+
+let g:mucomplete#enable_auto_at_startup = 1
+
+" don't change to any directory when non project files
+let g:rooter_change_directory_for_non_project_files = ''
+" show directory tree
+let g:netrw_liststyle = 3
+" open files in the same window
+let g:netrw_browse_split = 0
+
+"show argument hints
+let g:tern_show_argument_hints='on_hold'
+let g:startify_session_dir = '~/.vim/session'
+
+" Use jsx extension also in .js files
+let g:jsx_ext_required = 0
