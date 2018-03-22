@@ -1,99 +1,191 @@
-set nocompatible
-" set nofoldenable    " disable folding
-filetype off
-
-
 call plug#begin('~/.vim/plugged')
-" Plug 'airblade/vim-rooter'
+" Gist support
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+
+" Smooth scrolling
+Plug 'yuttie/comfortable-motion.vim'
+
+" Colorscheme and statusline
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'vim-scripts/Solarized'
+" Plug 'morhetz/gruvbox'
+" Plug 'sickill/vim-monokai'
+" Plug 'rainux/vim-desert-warm-256'
+" Plug 'w0ng/vim-hybrid'
+" Plug 'chriskempson/base16-vim'
+" Plug 'bluz71/vim-moonfly-colors'
+" Plug 'bluz71/vim-moonfly-statusline'
+Plug 'andreasvc/vim-256noir'
+
+" Go to root of the project when opening a file
+Plug 'airblade/vim-rooter'
+
 " Better startup screen
 Plug 'mhinz/vim-startify'
-Plug 'ctrlpvim/ctrlp.vim'
+
 " Improvements to the vim file explorer
-Plug 'tpope/vim-vinegar'
 Plug 'jeetsukumaran/vim-buffergator'
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Git integration
 Plug 'tpope/vim-fugitive'
 
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-
-" Programming languages autocompletion
-Plug 'Shougo/neocomplete.vim'
-
 " Color hex codes
 Plug 'chrisbra/Colorizer'
-" General editing plugins
+"
+" Better table management
 Plug 'dhruvasagar/vim-table-mode'
+
 " :FixWhiteSpace
 Plug 'bronson/vim-trailing-whitespace'
+
+" Comment portion of text
 Plug 'scrooloose/nerdcommenter'
-" Color themes
-Plug 'nanotech/jellybeans.vim'
-Plug 'vim-scripts/Solarized'
-Plug 'morhetz/gruvbox'
-Plug 'sickill/vim-monokai'
-Plug 'rainux/vim-desert-warm-256'
-Plug 'w0ng/vim-hybrid'
-Plug 'chriskempson/base16-vim'
 
+" Linting
+Plug 'w0rp/ale'
 
+" Search into files with :Ack
+Plug 'mileszs/ack.vim'
+
+" :Delete :Move :Rename :Chmod: Mkdir :Find :Locate: :Wall :SudoWrite :SudoEdit
+Plug 'tpope/vim-eunuch'
+
+" Dispatch commands asynchronoulsy
+Plug 'tpope/vim-dispatch'
+
+" Unimpaired, ]q [q
+Plug 'tpope/vim-unimpaired'
 
 " Javascript plugins
-" Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx'
- " improves on youcompleteme for javascript
-Plug 'ternjs/tern_for_vim' , { 'do': 'npm install' }
 " html plugins
 Plug 'mattn/emmet-vim/'
-" Linting
-Plug 'scrooloose/syntastic'
-" Prefer local eslint version
-Plug 'mtscout6/syntastic-local-eslint.vim'
-"Auto matching parentheses
-" Plug 'Raimondi/delimitMate'
-" Pug 'jiangmiao/auto-pairs'
-" Better status line
-" Plug 'bling/vim-airline'
 
-Plug 'mileszs/ack.vim'
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'itchyny/lightline.vim'
-
-Plug 'tpope/vim-eunuch'
-" Solidity
+" Solidity development
 Plug 'tomlion/vim-solidity'
+
+" Latex support
+Plug 'vim-latex/vim-latex'
 
 "Purescript
 Plug 'frigoeu/psc-ide-vim'
 Plug 'raichoo/purescript-vim'
-call plug#end()
-" show buffers in line
-" let g:airline#extensions#tabline#enabled = 1
 
-set statusline=                                     " Override default
-set statusline+=%1*%{fugitive#statusline()[4:-2]}%* " Show fugitive git info
-set statusline+=%2*\ %f\ %m\ %r%*                   " Show filename/path
-set statusline+=%3*%=%*                             " Set right-side status info after this line
-set statusline+=%4*%l/%L:%v%*                       " Set <line number>/<total lines>:<column>
-set statusline+=%5*\ %*                             " Set ending space
+" Graphql syntax
+Plug 'jparise/vim-graphql'
+
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-emoji.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+
+" glsl
+Plug 'tikhomirov/vim-glsl'
+call plug#end()
+
+set nocompatible
+filetype off
 let mapleader = ","
 set visualbell           " don't beep
 set noerrorbells         " don't beep
-
 filetype plugin on
 filetype indent on
 set backspace=eol,start,indent
 syntax on
 set noshowmode
 set title
+set encoding=utf-8
+setglobal fileencoding=utf-8
 " text search options
 set smartcase ignorecase incsearch hlsearch
-set laststatus=2
+
+" Remove toolbars
+set guioptions-=M  "remove menu bar
+set guioptions-=T  "remove toolbar
+
+set t_Co=256
+set background=dark
+let base16colorspace=256
+
+" colorscheme desert-warm-256
+" colorscheme moonfly
+
+" BEGIN COLORSCHEME
+colorscheme 256_noir
+" Change highlighting of cursor line when entering/leaving Insert Mode
+set cursorline
+highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+autocmd InsertEnter * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=234 guifg=NONE guibg=#1c1c1c
+autocmd InsertLeave * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+" END COLORSCHEME
+" BEGIN STATUSLINE
+set laststatus=2 " always show
+" Show linter warning and errors with ale
+function! LinterStatus() abort
+   let l:counts = ale#statusline#Count(bufnr(''))
+   let l:all_errors = l:counts.error + l:counts.style_error
+   let l:all_non_errors = l:counts.total - l:all_errors
+   return l:counts.total == 0 ? '' : printf(
+   \ 'W:%d E:%d',
+   \ l:all_non_errors,
+   \ l:all_errors
+   \)
+endfunction
+
+let g:currentmode={
+    \ 'n'  : 'Normal',
+    \ 'no' : 'Normal·Operator Pending',
+    \ 'v'  : 'Visual',
+    \ 'V'  : 'V·Line',
+    \ '^V' : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ '^S' : 'S·Block',
+    \ 'i'  : 'Insert',
+    \ 'R'  : 'Replace',
+    \ 'Rv' : 'V·Replace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal'
+    \}
+
+set noshowmode
+set statusline=%{fugitive#statusline()}
+" set statusline+=%0*\ %n\                                 " Buffer number
+set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
+set statusline+=%3*│                                     " Separator
+set statusline+=%2*\ %Y\                                 " FileType
+set statusline+=%3*│                                     " Separator
+set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
+set statusline+=\ (%{&ff})                               " FileFormat (dos/unix..)
+set statusline+=%=                                       " Right Side
+set statusline+=%2*\ col:\ %02v\                         " Colomn number
+set statusline+=%3*│                                     " Separator
+set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total lines, percentage of document
+set statusline+=%0*%{toupper(g:currentmode[mode()])}\  " The current mode
+set statusline+=%3*\ %{LinterStatus()}
+" hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad
+" hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
+" hi User3 ctermfg=236 ctermbg=236 guibg=#303030 guifg=#303030
+" hi User4 ctermfg=239 ctermbg=239 guibg=#4e4e4e guifg=#4e4e4e
+" END STATUSLINE
+
 set modeline
 set number
-" Wildmenu
+
+" Wildmenu, minibuffer completion
 set wildmenu
 set wildmode=list:longest,full
 set wildignore=*.o,*.obj,*~         "stuff to ignore when tab completing
@@ -107,8 +199,8 @@ set list
 " The following two options turn off physical line wrappings
 set textwidth=0
 set wrapmargin=0
-set guifont=DejaVu\ Sans\ Mono\ 15
-" set guifont=Monaco:h17
+" set guifont=DejaVu\ Sans\ Mono\ 15
+set guifont=Monaco:h18
 set nowrap " no visual wrapping
 set formatoptions=cq
 set scrolloff=4
@@ -135,21 +227,17 @@ set showmode
 
 autocmd BufRead,BufNewFile *.txt,*.tex set fo=cqt tw=72 wm=0
 
+" BEGIN TEX
 let g:tex_flavor='latex'
 " Use unicode for math symbols
 " set conceallevel=0
-set encoding=utf-8
-setglobal fileencoding=utf-8
 " Disable folding
 let Tex_FoldedSections=""
 let Tex_FoldedEnvironments=""
 let Tex_FoldedMisc=""
-" neocomplete
-" Disable AutoComplPop.
-" let g:acp_enableAtStartup = 1 "Enable automatic popup
-let g:neocomplete#enable_at_startup = 1
-" Uncomment the following to enable neocomplete for every supported filetype
-set omnifunc=syntaxcomplete#Complete
+" END TEX
+
+" set omnifunc=syntaxcomplete#Complete
 
 " Nerd table
 let g:table_mode_separator = '|'
@@ -157,34 +245,9 @@ let g:table_mode_corner = '+'
 let g:table_mode_corner_corner = '+'
 let g:table_mode_fillchar = '-'
 
-set t_Co=256
-set background=dark
-let base16colorspace=256
-
-colorscheme base16-tomorrow-night
 " display ambiguous unicode characters on two columns
 set ambiwidth=double
-set guioptions-=M  "remove menu bar
-set guioptions-=T  "remove toolbar
 
-" Syntastic
-"let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-
-let g:syntastic_error_symbol = '!'
-" let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '?'
-" let g:syntastic_style_warning_symbol = '💩'
-
-" highlight link SyntasticErrorSign SignColumn
-" highlight link SyntasticWarningSign SignColumn
-" highlight link SyntasticStyleErrorSign SignColumn
-" highlight link SyntasticStyleWarningSign SignColumn
 " Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
@@ -195,29 +258,96 @@ set backupskip=/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
-
 " Useful to speed up macros
-"set lazyredraw 
+"set lazyredraw
 
-" icons in airline
-" let g:airline_powerline_fonts = 1
-
+" Split horizontally and sort by filepath
 let g:buffergator_viewport_split_policy = 'T'
-
 let g:buffergator_sort_regime = 'filepath'
 let g:buffergator_display_regime = 'filepath'
 
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|png|jpg|jpeg|gif)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-let mapleader = "\<Space>"
+" Colorize hex codes in the following files
+let g:colorizer_auto_filetype='css,html,js,vim'
 
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-map <Leader>f :CtrlP<cr>
+let g:ale_linters = { 'javascript': ['standard'] }
+let g:ale_fixers = { 'javascript': ['standard']  }
 
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+" No other configuration is needed. Just start pressing <tab> or <s-tab>
+" to complete a word. If you want to enable automatic completion at startup, put
 
-let g:colorizer_auto_filetype='css,html,js'
+let g:mucomplete#enable_auto_at_startup = 1
 
+" don't change to any directory when non project files
+let g:rooter_change_directory_for_non_project_files = ''
+" show directory tree
+let g:netrw_liststyle = 3
+" open files in the same window
+let g:netrw_browse_split = 0
+
+let g:startify_session_dir = '~/.vim/session'
+
+" Use jsx extension also in .js files
+let g:jsx_ext_required = 0
+
+" let g:racer_cmd = "/Users/federico/.cargo/bin/racer"
+" let g:racer_experimental_completer = 1
+" mac
+" for rust rls
+if executable('rls')
+   au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+" async complete emoji
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
+    \ 'name': 'emoji',
+    \ 'whitelist': ['*'],
+    \ 'blacklist': ['rust'],
+    \ 'completor': function('asyncomplete#sources#emoji#completor'),
+    \ }))
+" async complete file
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+let g:rust_clip_command = 'pbcopy'
+
+" bindings for async complete
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+nnoremap <silent> K :call lsp#ui#vim#hover() <CR>
+nnoremap <silent> gd :call lsp#ui#vim#definition() <CR>
+nnoremap <silent> <F2> :call lsp#ui#vim#rename() <CR>
+let g:asyncomplete_remove_duplicates = 1
+
+" gist-vim config
+" let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+let g:gist_post_private = 1 " make gists private by default
+
+" set completeopt+=preview
+" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" Nerdcommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
