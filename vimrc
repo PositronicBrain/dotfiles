@@ -31,7 +31,8 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'tpope/vim-fugitive'
 
 " Color hex codes
-Plug 'chrisbra/Colorizer'
+" This breaks vim
+" Plug 'chrisbra/Colorizer'
 "
 " Better table management
 Plug 'dhruvasagar/vim-table-mode'
@@ -100,7 +101,7 @@ filetype indent on
 set backspace=eol,start,indent
 syntax on
 set noshowmode
-set title
+set title titlestring=%F
 set encoding=utf-8
 setglobal fileencoding=utf-8
 " text search options
@@ -164,8 +165,8 @@ let g:currentmode={
 set noshowmode
 set statusline=%{fugitive#statusline()}
 " set statusline+=%0*\ %n\                                 " Buffer number
-set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
-set statusline+=%3*│                                     " Separator
+" set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
+" set statusline+=%3*│                                     " Separator
 set statusline+=%2*\ %Y\                                 " FileType
 set statusline+=%3*│                                     " Separator
 set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
@@ -200,7 +201,7 @@ set list
 set textwidth=0
 set wrapmargin=0
 " set guifont=DejaVu\ Sans\ Mono\ 15
-set guifont=Monaco:h18
+set guifont=monaco\ 18
 set nowrap " no visual wrapping
 set formatoptions=cq
 set scrolloff=4
@@ -323,7 +324,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-nnoremap <silent> K :call lsp#ui#vim#hover() <CR>
+nnoremap <silent> K :call lsp#ui#vim#hover#get_hover_under_cursor() <CR>
 nnoremap <silent> gd :call lsp#ui#vim#definition() <CR>
 nnoremap <silent> <F2> :call lsp#ui#vim#rename() <CR>
 let g:asyncomplete_remove_duplicates = 1
