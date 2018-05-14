@@ -81,18 +81,18 @@ myLayout = onWorkspace "5:chat" pidginLayout $ tiled ||| Full ||| Mirror tiled
 -- ^ Program/Workspace hooks
 myManageHook :: ManageHook
 myManageHook = composeAll (concat
-    [ [resource     =? r            --> doIgnore               |   r   <- myIgnores]
-    , [className    =? c            --> viewShift "1"    |   c   <- terms    ]
-    , [className    =? c            --> viewShift "2"    |   c   <- audio      ]
-    , [className    =? c            --> viewShift "3"      |   c   <- web      ]
-    , [className    =? c            --> viewShift "4"    |   c   <- files    ]
-    , [className    =? c            --> viewShift "5"     |   c   <- chat     ]
-    , [className    =? c            --> viewShift "6"     |   c   <- gimp     ]
-    , [className    =? c            --> viewShift "7" |   c   <- inkscape ]
-    , [className    =? c            --> viewShift "8"  |   c   <- blender  ]
-    , [className    =? c            --> viewShift "9"     |   c   <- vbox     ]
-    , [className    =? c            --> doCenterFloat          |   c   <- cfloats  ]
-    , [className    =? c            --> doFloat                |   c   <- floats   ]
+    [ [resource     =? r            --> doIgnore        |   r   <- myIgnores]
+    , [className    =? c            --> viewShift "1"   |   c   <- terms    ]
+    , [className    =? c            --> viewShift "2"   |   c   <- audio    ]
+    , [className    =? c            --> viewShift "3"   |   c   <- web      ]
+    , [className    =? c            --> viewShift "4"   |   c   <- files    ]
+    , [className    =? c            --> viewShift "5"   |   c   <- chat     ]
+    , [className    =? c            --> viewShift "6"   |   c   <- gimp     ]
+    , [className    =? c            --> viewShift "7"   |   c   <- inkscape ]
+    , [className    =? c            --> viewShift "8"   |   c   <- blender  ]
+    , [className    =? c            --> viewShift "9"   |   c   <- vbox     ]
+    , [className    =? c            --> doCenterFloat   |   c   <- cfloats  ]
+    , [className    =? c            --> doFloat         |   c   <- floats   ]
     , [isFullscreen                 --> myDoFullFloat                              ]
     ]) <+> manageDocks
 
@@ -100,19 +100,21 @@ myManageHook = composeAll (concat
         viewShift =  doF . liftM2 (.) W.greedyView W.shift
 
         -- classnames
-        terms    = ["Evilvte"]
-        files    = ["Thunar","Evince","Gnome-documents","Jabref"]
-        cfloats   = ["mpv","XFontSel","mpv","mpv",
+        terms    = ["Evilvte", "termite", "Termite"]
+        files    = ["Thunar","Jabref","pcmanfm","Pcmanfm"]
+        cfloats  = ["mpv","XFontSel","mpv","mpv",
                     "Default - Wine desktop","Wine","openttd"]
         floats   = ["Mini (bristol)","Bristol gui","BasicWin","Mini",
-                    "Qsynth","Vmpk","Yoshimi","Qjackctl","Hydrogen","Amsynth","Aeolus"]
-        web      = ["Firefox","Chromium"]
+                    "Qsynth","Vmpk","Yoshimi","Qjackctl",
+                    "Hydrogen","Amsynth","Aeolus"]
+        web      = ["Firefox","Chromium","chromium"]
         chat     = ["Pidgin","Buddy List"]
         gimp     = ["Gimp"]
         inkscape = ["Inkscape"]
         blender  = ["Blender"]
         vbox     = ["VirtualBox"]
-        audio    = ["Amsynth","Aeolus","Qjackctl","vmpk","Hydrogen","BasicWin","Qsynth","Vmpk","Yoshimi"]
+        audio    = ["Amsynth","Aeolus","Qjackctl","vmpk",
+                    "Hydrogen","BasicWin","Qsynth","Vmpk","Yoshimi"]
         --
         -- resources
         myIgnores = []
@@ -146,21 +148,22 @@ menu = sort ["arandr",
              "evince",
              "quodlibet",
              "thunar",
-             "vmpk",
-             "yoshimi",
-             "amsynth",
-             "aeolus",
-             "qsynth",
-             "startBristol -mini -quality 8 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "startBristol -odyssey -quality 8 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "startBristol -arp2600 -quality 6 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "startBristol -dx -quality 8 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "startBristol -solina -quality 8 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "startBristol -juno -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "startBristol -prophet -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "startBristol -obx -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "startBristol -b3 -quality 6 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
-             "hydrogen",
+             "pcmanfm",
+             -- "vmpk",
+             -- "yoshimi",
+             -- "amsynth",
+             -- "aeolus",
+             -- "qsynth",
+             -- "startBristol -mini -quality 8 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "startBristol -odyssey -quality 8 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "startBristol -arp2600 -quality 6 -scale 2 -preload 8 -nnp -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "startBristol -dx -quality 8 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "startBristol -solina -quality 8 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "startBristol -juno -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "startBristol -prophet -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "startBristol -obx -quality 8 -scale 2 -preload 8  -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "startBristol -b3 -quality 6 -scale 2 -preload 8 -wwf -rate 48000  -blofraction 0.5 -blo 64",
+             -- "hydrogen",
              "baobab",
              "gnome-disks",
              "paprefs",
@@ -195,11 +198,11 @@ lightBackgroundColor :: String
 lightBackgroundColor  = "#456030"
 
 oxyPP :: Handle -> PP
-oxyPP h = defaultPP  { ppCurrent = wrap "<fc=black,aquamarine3> " " </fc>" 
+oxyPP h = defaultPP  { ppCurrent = wrap "<fc=black,aquamarine3> " " </fc>"
                      , ppSep     = ""
                      , ppWsSep = ""
-                     , ppVisible = wrap "<fc=black,DarkSlateGray4> " " </fc>" 
-                     , ppLayout = \x -> "<fc=aquamarine2,black>:: " ++ 
+                     , ppVisible = wrap "<fc=black,DarkSlateGray4> " " </fc>"
+                     , ppLayout = \x -> "<fc=aquamarine2,black>:: " ++
                                         case x of
                                           "Mirror ResizableTall"   -> "MTiled"
                                           "ResizableTall"          -> "Tiled"
@@ -245,7 +248,7 @@ main= do xmobarPipe <- spawnPipe xmobarCmd
                   -- smartborders removes borders when logical (e.g. fullscreen)
                   layoutHook =  avoidStruts $ smartBorders
                                 myLayout,
-                  
+
      handleEventHook    = fullscreenEventHook, -- fix chrome fullscreen
                   normalBorderColor = myNormalBorderColor,
                   focusedBorderColor = myFocusedBorderColor,
