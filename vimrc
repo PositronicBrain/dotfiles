@@ -101,7 +101,8 @@ filetype indent on
 set backspace=eol,start,indent
 syntax on
 set noshowmode
-set title titlestring=%F
+set title titlestring=vim
+set title titlestring+=%F
 set encoding=utf-8
 setglobal fileencoding=utf-8
 " text search options
