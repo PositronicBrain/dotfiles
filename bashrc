@@ -1,9 +1,11 @@
-TEXINPUTS=.:$TEXINPUTS
-USER=`id -un`
-HISTSIZE=1000
-HISTCONTROL=ignoredups
-HISTIGNORE="bg:fg:ls:cd:history"
-TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
+export EDITOR=gvim
+export VISUAL=gvim
+export TEXINPUTS=.:$TEXINPUTS
+export USER=`id -un`
+export HISTSIZE=10000
+export HISTCONTROL=ignoredups
+export HISTIGNORE="bg:fg:ls:cd:history"
+export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
 
 set -o notify
 # do not overwrite files with >
@@ -36,10 +38,12 @@ if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
 fi
 
 #prompt
-export PS1='\[\e[1;32m\][\u @ \h \w$(__git_ps1 " (%s)")]\[\e[0m\]\n$ '
+#export PS1='\[\e[1;32m\][\u @ \h \w$(__git_ps1 " (%s)")]\[\e[0m\]\n$ '
+export PS1='\u@\h \w$(__git_ps1 " (%s)") '
 
 #Aliases
 
+alias e=gvim
 alias cp='cp -vi'
 alias rm='rm -vi'
 alias mv='mv -vi'
@@ -61,5 +65,9 @@ if [[ -x /usr/bin/fortune &&  -x /usr/bin/cowsay ]]; then
   dir='/usr/share/cows/'
   file=`/bin/ls -1 "$dir" | sort --random-sort | head -1`
   cow=$(echo "$file" | sed -e "s/\.cow//")
-  /usr/bin/fortune -as | cowsay -f $cow
+  /usr/bin/fortune | cowsay -f $cow
 fi
+
+export NVM_DIR="/home/federico/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
