@@ -1,0 +1,17 @@
+export SHELL="/bin/bash"
+export EDITOR="gvim"
+export BROWSER="chromium"
+export LANG="en_US.UTF-8"
+
+setxkbmap -layout us
+setxkbmap -option ctrl:nocaps
+if [[ -f $HOME/.Xresources ]]; then
+  xrdb -merge $HOME/.Xresources
+fi
+
+xcompmgr &
+conky
+feh --bg-scale /usr/share/backgrounds/gnome/endless-shapes.jpg
+xclock &
+redshift-gtk &
+
