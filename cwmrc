@@ -17,9 +17,10 @@ gap 0 0 0 0
 
 # application menu
 command term sakura
-command ranger "termite -e ranger"
-command mutt "termite -e mutt"
-command vim "termite -e vim"
+command lock slock
+command mutt "sakura -t mutt -e mutt"
+command vim "sakura -e vim"
+command ncmpc "sakura -t ncmpc -e ncmpc"
 command chromium chromium
 command spacefm spacefm
 command telegram telegram-desktop
