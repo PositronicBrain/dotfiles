@@ -6,7 +6,6 @@ export HISTSIZE=10000
 export HISTCONTROL=ignoredups
 export HISTIGNORE="bg:fg:ls:cd:history"
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
-
 set -o notify
 # do not overwrite files with >
 set -o noclobber
@@ -37,9 +36,10 @@ if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
     source  /usr/share/git/completion/git-prompt.sh
 fi
 
-#prompt
-#export PS1='\[\e[1;32m\][\u @ \h \w$(__git_ps1 " (%s)")]\[\e[0m\]\n$ '
-export PS1='\u@\h \w$(__git_ps1 " (%s)") '
+
+EXT_COLOR="\[\033[38;5;243m\]"
+NO_COLOR="\[\033[0m\]"
+export PS1="${EXT_COLOR}\u@\h \w$(__git_ps1 " (%s)")\n\$$NO_COLOR "
 
 #Aliases
 
@@ -50,15 +50,18 @@ alias mv='mv -vi'
 # colorize output of ls with dircolor
 alias ls='ls --color=auto'
 
-# Nice colors for manpages
-LESS_TERMCAP_mb=$'\E[01;31m'
-LESS_TERMCAP_md=$'\E[01;31m'
-LESS_TERMCAP_me=$'\E[0m'
-LESS_TERMCAP_se=$'\E[0m'
-LESS_TERMCAP_so=$'\E[01;44;33m'
-LESS_TERMCAP_ue=$'\E[0m'
-LESS_TERMCAP_us=$'\E[01;32m'
-
+# Man colors
+export MANROFFOPT='-c'
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_md=$(tput bold; tput setaf 6)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7)
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_mr=$(tput rev)
+export LESS_TERMCAP_mh=$(tput dim)
+#
 
 #greeting message
 if [[ -x /usr/bin/fortune &&  -x /usr/bin/cowsay ]]; then
