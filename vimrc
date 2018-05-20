@@ -102,6 +102,7 @@ set backspace=eol,start,indent
 syntax on
 set noshowmode
 set title titlestring=vim
+set title titlestring+=\ 
 set title titlestring+=%F
 set encoding=utf-8
 setglobal fileencoding=utf-8
