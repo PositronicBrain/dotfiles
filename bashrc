@@ -65,10 +65,7 @@ export LESS_TERMCAP_mh=$(tput dim)
 
 #greeting message
 if [[ -x /usr/bin/fortune &&  -x /usr/bin/cowsay ]]; then
-  dir='/usr/share/cows/'
-  file=`/bin/ls -1 "$dir" | sort --random-sort | head -1`
-  cow=$(echo "$file" | sed -e "s/\.cow//")
-  /usr/bin/fortune | cowsay -f $cow
+  /usr/bin/fortune | cowsay
 fi
 
 export NVM_DIR="/home/federico/.nvm"
