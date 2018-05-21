@@ -1,5 +1,5 @@
-export EDITOR=gvim
-export VISUAL=gvim
+export EDITOR=vim
+export VISUAL=vim
 export TEXINPUTS=.:$TEXINPUTS
 export USER=`id -un`
 export HISTSIZE=10000
@@ -43,7 +43,7 @@ export PS1="${EXT_COLOR}\u@\h \w$(__git_ps1 " (%s)")\n\$$NO_COLOR "
 
 #Aliases
 
-alias e=gvim
+alias e=vim
 alias cp='cp -vi'
 alias rm='rm -vi'
 alias mv='mv -vi'
@@ -52,12 +52,12 @@ alias ls='ls --color=auto'
 
 # Man colors
 export MANROFFOPT='-c'
-export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
-export LESS_TERMCAP_md=$(tput bold; tput setaf 6)
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 007)
+export LESS_TERMCAP_md=$(tput bold; tput setaf 007)
 export LESS_TERMCAP_me=$(tput sgr0)
-export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 236; tput setab 007)
 export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 240)
 export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
 export LESS_TERMCAP_mr=$(tput rev)
 export LESS_TERMCAP_mh=$(tput dim)
