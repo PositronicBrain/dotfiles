@@ -65,7 +65,7 @@ export LESS_TERMCAP_mh=$(tput dim)
 
 #greeting message
 if [[ -x /usr/bin/fortune &&  -x /usr/bin/cowsay ]]; then
-  /usr/bin/fortune | cowsay
+  /usr/bin/fortune -s -n 1024 | cowsay
 fi
 
 export NVM_DIR="/home/federico/.nvm"
