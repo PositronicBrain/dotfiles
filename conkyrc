@@ -1,8 +1,9 @@
  conky.config = {
     background = true,
+    short_units = true,
     double_buffer = true,
     own_window = true,
-    own_window_type = 'override',
+    own_window_type = 'desktop',
     own_window_class = 'Conky',
     own_window_transparent = false,
     own_window_argb_visual = true,
@@ -17,7 +18,7 @@
     gap_y = 50,
     minimum_height = 5,
     minimum_width = 5,
-    maximum_width = 400,
+    maximum_width = 512,
     net_avg_samples = 2,
     no_buffers = true,
     out_to_console = false,
@@ -36,27 +37,27 @@ $hr
 ${color grey}Users:$color $user_names
 ${color grey}Kernel:$color $sysname $kernel/$machine
 ${color grey}Uptime:$color $uptime
-${color grey}Frequency:$color $freq_g GHz
+$hr
 ${color grey}RAM:$color $mem/$memmax - $memperc% ${membar 4}
 ${color grey}Swap:$color $swap/$swapmax - $swapperc% ${swapbar 4}
 $hr
+${color grey}Entropy: $color $entropy_avail/$entropy_poolsize ${entropy_bar 4}
+$hr
 ${color grey}Temps: $color${exec sensors | grep 'Core 0' | cut -c16-23}/${exec sensors | grep 'Core 1' | cut -c16-23}/${exec sensors | grep 'Core 2' | cut -c16-23}/${exec sensors | grep 'Core 3' | cut -c16-23}
-$color ${cpugraph cpu0 20,180} ${cpugraph cpu1 20,180}
-$color ${cpugraph cpu2 20,180} ${cpugraph cpu3 20,180}
-${hddtemp sdb}
+${color grey}Freqs: $color${freq_g 0}Ghz/${freq_g 1}Ghz/${freq_g 2}Ghz/${freq_g 3}Ghz
+$color ${cpugraph cpu0 20,190 000000 7f8ed3}  ${cpugraph cpu1 20,190 000000 7f8ed3}
+$color ${cpugraph cpu2 20,190 000000 7f8ed3}  ${cpugraph cpu3 20,190 000000 7f8ed3}
+#${hddtemp sdb}
 $hr
-${color grey}Processes:$color $processes  ${color grey}Running:$color $running_processes
+$color / ${fs_used /}/${fs_size /}       /home ${fs_used /home}/${fs_size /home}
+$color ${fs_bar 4,190 /}  ${fs_bar 4,190 /home}
+$color ${diskiograph sda2 20,190 000000 7f8ed3}  ${diskiograph sdb1 20,190 000000 7f8ed3}
 $hr
-${color grey}File systems:
- / $color${fs_used /}/${fs_size /}  ${diskio sda2} ${fs_bar 6 /}
- /home $color${fs_used /home}/${fs_size /home} ${diskio sdb1} ${fs_bar 6 /home}
-$hr
-${color grey}Entropy: $color $entropy_avail/$entropy_poolsize $entropy_bar
-$hr
-${color grey} Down: $color ${downspeed enp3s0} ${color grey}     Up: $color ${upspeed enp3s0}
-$color ${downspeedgraph enp3s0 20,180} ${upspeedgraph enp3s0 20,180}
+${color grey} Down: $color ${downspeed enp3s0} ${color grey}         Up: $color ${upspeed enp3s0}
+$color ${downspeedgraph enp3s0 20,190 000000 7f8ed3}  ${upspeedgraph enp3s0 20,190  000000 7f8ed3}
 ${color grey} Connections$color In: ${tcp_portmon 1 32767 count}  Out: ${tcp_portmon 32768 61000 count}${alignr}
 $hr
+${color grey}Processes:$color $processes  ${color grey}Running:$color $running_processes
 ${color} Cpu usage              CPU%
 ${color #ddaa00} ${top name 1}${offset 50} ${top cpu 1}
 ${color #5b6dad} ${top name 2}${offset 50} ${top cpu 2}
@@ -65,18 +66,4 @@ ${color} Mem usage              MEM%
 ${color #ddaa00} ${top_mem name 1}${offset 50} ${top_mem mem 1}
 ${color #5b6dad} ${top_mem name 2}${offset 50} ${top_mem mem 2}
 ${color #5b6dad} ${top_mem name 3}${offset 50} ${top_mem mem 3}
-${color1}Port(s)${alignr}#Connections
-${color}Inbound: ${tcp_portmon 1 32767 count}  Outbound: ${tcp_portmon 32768 61000 count}${alignr}ALL: ${tcp_portmon 1 65535 count}
-${color grey}Inbound Connection ${alignr} Local Service/Port${color}
-${tcp_portmon 1 32767 rhost 0} ${alignr} ${tcp_portmon 1 32767 lservice 0}
-${tcp_portmon 1 32767 rhost 1} ${alignr} ${tcp_portmon 1 32767 lservice 1}
-${tcp_portmon 1 32767 rhost 2} ${alignr} ${tcp_portmon 1 32767 lservice 2}
-${tcp_portmon 1 32767 rhost 3} ${alignr} ${tcp_portmon 1 32767 lservice 3}
-${tcp_portmon 1 32767 rhost 4} ${alignr} ${tcp_portmon 1 32767 lservice 4}
-${color1}Outbound Connection ${alignr} Remote Service/Port${color}
-${tcp_portmon 32768 61000 rhost 0} ${alignr} ${tcp_portmon 32768 61000 rservice 0}
-${tcp_portmon 32768 61000 rhost 1} ${alignr} ${tcp_portmon 32768 61000 rservice 1}
-${tcp_portmon 32768 61000 rhost 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
-${tcp_portmon 32768 61000 rhost 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
-${tcp_portmon 32768 61000 rhost 4} ${alignr} ${tcp_portmon 32768 61000 rservice 4}
 ]]
